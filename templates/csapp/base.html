@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>
+			Rate my CS course -
+			{% block title_block %}
+				A WAD2 Group Project
+			{% endblock %}
+		</title>
+	</head>
+	
+	<body>
+		<h1> Rate my CS course </h1>
+		
+		<div>
+		{% block body_block %}
+		{% endblock %}
+		</div>
+	</body>
+	
+</html>
