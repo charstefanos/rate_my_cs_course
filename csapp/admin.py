@@ -1,3 +1,6 @@
 from django.contrib import admin
+from csapp.models import Course, UserProfile, CourseRating
 
-# Register your models here.
+admin.site.register(Course)
+admin.site.register(CourseRating)
+admin.site.register(UserProfile)

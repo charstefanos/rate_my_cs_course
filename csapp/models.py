@@ -31,19 +31,15 @@ class Course(models.Model):
 # However, needs to be checked exactly how to be used. Full documentation at https://django-star-ratings.readthedocs.io/en/latest/?badge=latest/#
 # If needed, can be uninstalled and removed completely.
 class CourseRating(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     overall_rating = Rating
     lecturer_rating = Rating
     engagement = Rating
     informative = Rating
+    comment = models.CharField(max_length = 250, blank = True)
     def __str__(self):
         return self.overall_rating
 
-#A class for the reviews(comments) of the course (related to the course rating many-to-one)
-class courseReview(models.Model):
-    course_rating = models.ForeignKey(CourseRating, on_delete=models.CASCADE)
-    comment = models.CharField(max_length = 250, blank = True)
-    def __str__(self):
-        return self.comment  
         
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
