@@ -32,7 +32,7 @@ class UserProfileForm(forms.ModelForm):
             }
 
         widgets = {
-            'current_student' : forms.CheckboxSelectMultiple(choices = TRUE_FALSE_CHOICES),
+            'current_student' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
             }
 
 #We should use javascript or ajax to blank out this section of the answer to current student is no
@@ -48,7 +48,7 @@ class CurrentStudentForm(forms.ModelForm):
             }
 
         widgets = {
-            'contact' : forms.CheckboxSelectMultiple(choices = TRUE_FALSE_CHOICES),
+            'contact' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
              }
 
     
