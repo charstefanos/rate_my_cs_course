@@ -25,10 +25,10 @@ class UserProfileForm(forms.ModelForm):
         fields = ('first_name','last_name','email','picture','current_student')
         
         labels = {
-            'first_name': 'Fist name',
+            'first_name': 'First name',
             'last_name' : 'Surname',
             'email' : 'Email',
-            'current_student' : 'Are you currently a student?',
+            'current_student' : 'Are you currently a student at University of Glasgow?',
             }
 
         widgets = {
@@ -42,7 +42,7 @@ class CurrentStudentForm(forms.ModelForm):
         fields = ('year_of_studies','courses','contact')
 
         labels = {
-            'year_of_studies' : 'What year are you currently on?',
+            'year_of_studies' : 'What year are you currently in?',
             'courses' : 'What courses did you take?',
             'contact' : 'Would you like your name and email to be visible for others to see?',
             }
