@@ -7,7 +7,7 @@ YEAR_IN_UNI_CHOICES = (
             ('UNDERGRAD_1YEAR', 'Undergraduate (year 1)'),
             ('UNDERGRAD_2YEAR', 'Undergraduate (year 2)'),
             ('UNDERGRAD_3YEAR', 'Undergraduate (year 3)'),
-            ('UNDERGRAD_1YEAR', 'Undergraduate (year 4)'),
+            ('UNDERGRAD_4YEAR', 'Undergraduate (year 4)'),
         )
     ),
     ('Postgraduate', (
