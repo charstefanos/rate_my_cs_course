@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'csapp',
-    'star_ratings', #star ratings functionality
 ]
 
 MIDDLEWARE = [

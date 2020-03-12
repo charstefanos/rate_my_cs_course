@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from star_ratings.models import Rating
 
 class Course(models.Model):
 #We have specified 30 for length of the name, but I will leave it 128 for now - can be changed.
@@ -27,19 +26,31 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
-#installed: pip install django-star-ratings. Added it in installed apps in settings.py and in the urls.py. 
-# However, needs to be checked exactly how to be used. Full documentation at https://django-star-ratings.readthedocs.io/en/latest/?badge=latest/#
-# If needed, can be uninstalled and removed completely.
+#Implemented rating using list of values. Find a way to change to star rating.
 class CourseRating(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    overall_rating = Rating
-    lecturer_rating = Rating
-    engagement = Rating
-    informative = Rating
+    RATING_CHOICES = (
+        (5, 'Very Good'),
+        (4, 'Good'),
+        (3, 'Average'),
+        (2, 'Bad'),
+        (1, 'Very Bad'),
+    )
+    overall_rating = models.CharField(
+        max_length=15,
+        choices = RATING_CHOICES)
+    lecturer_rating = models.CharField(
+        max_length=15,
+        choices = RATING_CHOICES)
+    engagement = models.CharField(
+        max_length=15,
+        choices = RATING_CHOICES)
+    informative = models.CharField(
+        max_length=15,
+        choices = RATING_CHOICES)
     comment = models.CharField(max_length = 250, blank = True)
     def __str__(self):
         return self.overall_rating
-
         
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
