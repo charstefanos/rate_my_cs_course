@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.urls import reverse
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from csapp.forms import UserForm, UserProfileForm, CurrentStudentForm
 
@@ -32,7 +35,7 @@ def register(request):
             
             registered = True
         else:
-            print(user_form.errors, profile_form.errors, current_student_form.erros)
+            print(user_form.errors, profile_form.errors, current_student_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
@@ -44,4 +47,21 @@ def register(request):
                              'profile_form': profile_form,
                              'current_student_form' : current_student_form,
                              'registered': registered})
-    
+                             
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('csapp:home'))
+            else:
+                return HttpResponse("Your account is disabled")
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'csapp/login.html')
