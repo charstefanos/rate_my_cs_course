@@ -24,11 +24,11 @@ class Course(models.Model):
         max_length=32,
         choices=YEAR_IN_UNI_CHOICES,
     )
-	#Include the ratings - average will be displayed on the course page (can be removed if unused.)
-	overall_rating = models.IntegerField()
-    lecturer_rating = models.IntegerField()
-    engagement = models.IntegerField()
-    informative = models.IntegerField()
+    #Include the ratings - average will be displayed on the course page (can be removed if unused.)
+    overall_rating = models.IntegerField(default=0)
+    lecturer_rating = models.IntegerField(default=0)
+    engagement = models.IntegerField(default=0)
+    informative = models.IntegerField(default=0)
     def __str__(self):
         return self.name
         
@@ -64,10 +64,10 @@ class CourseRating(models.Model):
     #two foreign keys - for the student and the course (one-to-many relationships)
     student = models.ForeignKey(UofGStudent, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    overall_rating = models.IntegerField()
-    lecturer_rating = models.IntegerField()
-    engagement = models.IntegerField()
-    informative = models.IntegerField()
+    overall_rating = models.IntegerField(default=0)
+    lecturer_rating = models.IntegerField(default=0)
+    engagement = models.IntegerField(default=0)
+    informative = models.IntegerField(default=0)
     comment = models.CharField(max_length = 250, blank = True)
     def __str__(self):
         return self.overall_rating

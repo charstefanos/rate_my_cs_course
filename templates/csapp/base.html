@@ -65,9 +65,11 @@ body {
 <body>
 
 <div class="topnav">
-  <a href="{% url 'csapp:home' %}">Home</a>
-<a href="{% url 'csapp:register' %}">Sign-Up</a>
-<a href="{% url 'csapp:login' %}">Login</a>
+	<a href="{% url 'csapp:home' %}">Home</a>
+	<a href="{% url 'csapp:register' %}">Sign-Up</a>
+	<a href="{% url 'csapp:login' %}">Login</a>
+	<a href="{% url 'csapp:logout' %}">Logout</a>
+	
 <input type="text" placeholder="Search..">
 </div>
   
@@ -82,8 +84,7 @@ body {
 	</head>
 	
 	<body>
-		<h1> Rate my CS course </h1>
-		
+	
 		<div>
 		{% block body_block %}
 		{% endblock %}
