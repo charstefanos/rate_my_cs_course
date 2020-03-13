@@ -24,6 +24,11 @@ class Course(models.Model):
         max_length=32,
         choices=YEAR_IN_UNI_CHOICES,
     )
+	#Include the ratings - average will be displayed on the course page (can be removed if unused.)
+	overall_rating = models.IntegerField()
+    lecturer_rating = models.IntegerField()
+    engagement = models.IntegerField()
+    informative = models.IntegerField()
     def __str__(self):
         return self.name
         
@@ -54,30 +59,15 @@ class UofGStudent(UserProfile):
 class NonStudent(UserProfile):
     pass
 
-#Implemented rating using list of values. Find a way to change to star rating.
+#Implemented rating as integers - to be conveted from the number of stars a user has chosen.
 class CourseRating(models.Model):
     #two foreign keys - for the student and the course (one-to-many relationships)
     student = models.ForeignKey(UofGStudent, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    RATING_CHOICES = (
-        (5, 'Very Good'),
-        (4, 'Good'),
-        (3, 'Average'),
-        (2, 'Bad'),
-        (1, 'Very Bad'),
-    )
-    overall_rating = models.CharField(
-        max_length=15,
-        choices = RATING_CHOICES)
-    lecturer_rating = models.CharField(
-        max_length=15,
-        choices = RATING_CHOICES)
-    engagement = models.CharField(
-        max_length=15,
-        choices = RATING_CHOICES)
-    informative = models.CharField(
-        max_length=15,
-        choices = RATING_CHOICES)
+    overall_rating = models.IntegerField()
+    lecturer_rating = models.IntegerField()
+    engagement = models.IntegerField()
+    informative = models.IntegerField()
     comment = models.CharField(max_length = 250, blank = True)
     def __str__(self):
         return self.overall_rating
