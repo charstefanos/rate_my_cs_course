@@ -1,0 +1,14 @@
+{% extends 'csapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	{{course.name}}
+{% endblock %}
+
+{% block body_block %}
+	{{course.description}}
+	{% if user.is_authenticated %}
+		Hi {{ user.username}}!
+	{% endif %}
+
+{% endblock %}

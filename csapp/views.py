@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from csapp.forms import UserForm, UserProfileForm, CurrentStudentForm
+from csapp.models import Course
+from django.http import Http404 
 
 def home(request):
     return render(request, 'csapp/home.html')
@@ -83,5 +85,13 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('csapp:home'))
+    
+def postgraduate_course(request, course_name_slug):
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+    except Course.DoesNotExist:
+        raise Http404("Course does not exist") 
+    return render(request, 'csapp/course.html', {'course':course})
 
+    
 

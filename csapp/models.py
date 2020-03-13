@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 #The list of available options organised into two groups. Contains tuples (value, human-readable name).
 YEAR_IN_UNI_CHOICES = (
@@ -44,6 +45,14 @@ class Course(models.Model):
         max_length=32,
         choices=YEAR_IN_UNI_CHOICES,
     )
+    
+    
+    slug = models.SlugField(unique=True)
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Course, self).save(*args, **kwargs)
+        
     def __str__(self):
         return self.name
         
