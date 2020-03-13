@@ -1,0 +1,14 @@
+{% extends 'csapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Postgraduate Page
+{% endblock %}
+
+{% block body_block %}
+	This is the Postgraduate page!
+	{% if user.is_authenticated %}
+		Hi {{ user.username}}!
+	{% endif %}
+
+{% endblock %}

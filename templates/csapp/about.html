@@ -1,0 +1,14 @@
+{% extends 'csapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	About Page
+{% endblock %}
+
+{% block body_block %}
+	This is the about page!
+	{% if user.is_authenticated %}
+		Hi {{ user.username}}!
+	{% endif %}
+
+{% endblock %}

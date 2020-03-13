@@ -9,6 +9,18 @@ from csapp.forms import UserForm, UserProfileForm, CurrentStudentForm
 def home(request):
     return render(request, 'csapp/home.html')
 
+def undergraduate(request):
+    return render(request, 'csapp/undergraduate.html')
+
+def postgraduate(request):
+    return render(request, 'csapp/postgraduate.html')
+
+def about(request):
+    return render(request, 'csapp/about.html')
+
+def days(request):
+    return render(request, 'csapp/days.html')
+
 def register(request):
     registered = False
 

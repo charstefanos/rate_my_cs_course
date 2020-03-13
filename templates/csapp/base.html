@@ -65,10 +65,16 @@ body {
 <body>
 
 <div class="topnav">
-	<a href="{% url 'csapp:home' %}">Home</a>
+  <a href="{% url 'csapp:home' %}">Home</a>
+  <a href="{% url 'csapp:undergraduate' %}">Undergraduate</a>
+  <a href="{% url 'csapp:postgraduate' %}">Postgraduate</a>
+  <a href="{% url 'csapp:about' %}">About us</a>
+  <a href="{% url 'csapp:days' %}">Open days</a>
 	<a href="{% url 'csapp:register' %}">Sign-Up</a>
-	<a href="{% url 'csapp:login' %}">Login</a>
-	<a href="{% url 'csapp:logout' %}">Logout</a>
+  <a href="{% url 'csapp:login' %}">Login</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'csapp:logout' %}">Logout</a>
+  {% endif %}
 	
 <input type="text" placeholder="Search..">
 </div>
