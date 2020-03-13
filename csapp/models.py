@@ -44,13 +44,8 @@ class Course(models.Model):
         max_length=32,
         choices=YEAR_IN_UNI_CHOICES,
     )
-    #Include the ratings - average will be displayed on the course page (can be removed if unused.)
-    #overall_rating = models.IntegerField(default=0)
-    #lecturer_rating = models.IntegerField(default=0)
-    #engagement = models.IntegerField(default=0)
-    #informative = models.IntegerField(default=0)
-    #def __str__(self):
-    #    return self.name
+    def __str__(self):
+        return self.name
         
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
