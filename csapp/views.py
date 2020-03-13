@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from csapp.forms import UserForm, UserProfileForm, CurrentStudentForm
 
 def home(request):
@@ -65,3 +66,10 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'csapp/login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('csapp:home'))
+
+

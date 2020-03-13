@@ -14,15 +14,33 @@
 	<body>
 		<h1> Rate my CS course </h1>
 		
+		<div id="top-right-menu">
+			<ul>
+				{% if user.is_authenticated %}
+					<!-- <li><a href="">Profile</a></li> -->
+					<li><a href="{% url 'csapp:logout' %}">Logout</a></li>
+				{% else %}
+					<li><a href="{% url 'csapp:login' %}">Login</a></li>
+					<li><a href="{% url 'csapp:register' %}">Sign-Up</a></li>
+				{% endif %}
+		</div>
+		
+		<div id="menu">
+			<ul>
+				<li><a href="{% url 'csapp:home' %}">Home</a></li>
+				<!-- <li><a href="">Undergraduate</a></li>
+				<li><a href="">Postgraduate</a></li>
+				<li><a href="">About us</a></li>
+				<li><a href="">Open days</a></li>
+				<li><a href="">Your Reviews</a></li> -->
+				
+	</div>
+		
 		<div>
 		{% block body_block %}
 		{% endblock %}
 		</div>
 	</body>
 
-<br/>
-<li><a href="{% url 'csapp:home' %}">Home</a></li>
-<li><a href="{% url 'csapp:register' %}">Sign-Up</a></li>
-<li><a href="{% url 'csapp:login' %}">Login</a></li>
 </html>
 
