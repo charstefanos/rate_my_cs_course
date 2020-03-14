@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from csapp.forms import UserForm, UserProfileForm, CurrentStudentForm
+from csapp.forms import UserForm, UserProfileForm
 from csapp.models import Course
 from django.http import Http404 
 
@@ -29,9 +29,8 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        current_student_form = CurrentStudentForm(request.POST)
-
-        if user_form.is_valid() and profile_form.is_valid() and current_student_form.is_valid():
+        
+        if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
@@ -43,24 +42,19 @@ def register(request):
                 profile.picture = request.FILES['picture']
 
             profile.save()
+            profile_form.save_m2m()
 
-            student = current_student_form.save()
-            student.user = user
-            student.save()
-            
             registered = True
         else:
-            print(user_form.errors, profile_form.errors, current_student_form.errors)
+            print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-        current_student_form = CurrentStudentForm()
-
+        
     return render(request,
                   'csapp/register.html',
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
-                             'current_student_form' : current_student_form,
                              'registered': registered})
                              
 def user_login(request):

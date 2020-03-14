@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from csapp.models import UserProfile
-from csapp.models import UofGStudent
+from csapp.models import UserProfile, Course
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -20,36 +19,27 @@ TRUE_FALSE_CHOICES = (
 )
 
 class UserProfileForm(forms.ModelForm):
+
     class Meta:
         model = UserProfile
-        fields = ('first_name','last_name','email','picture','current_student')
+        fields = ('first_name','last_name','email','picture','current_student','year_of_studies','courses','contact')
         
         labels = {
             'first_name': 'First name',
             'last_name' : 'Surname',
             'email' : 'Email',
             'current_student' : 'Are you currently a student at University of Glasgow?',
-            }
-
-        widgets = {
-            'current_student' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
-            }
-
-#We should use javascript or ajax to blank out this section of the answer to current student is no
-class CurrentStudentForm(forms.ModelForm):
-    class Meta:
-        model = UofGStudent
-        fields = ('year_of_studies','courses','contact')
-
-        labels = {
             'year_of_studies' : 'What year are you currently in?',
-            'courses' : 'What courses did you take?',
+            'courses' : 'What courses did you take',
             'contact' : 'Would you like your name and email to be visible for others to see?',
             }
 
         widgets = {
+            'current_student' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
             'contact' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
-             }
+            'courses' : forms.CheckboxSelectMultiple(),
+            }
+
 
     
 
