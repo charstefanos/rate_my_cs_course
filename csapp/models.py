@@ -17,30 +17,10 @@ YEAR_IN_UNI_CHOICES = (
     ),
     )
 
-#This is temporary, just trying to see if it will work.
-All_Courses = (
-    ('Undergraduate', (
-        ('LEVEL_1', '1CT INTRODUCTION TO COMPUTATIONAL THINKING COMPSCI1016',
-                   '1S SYSTEMS COMPSCI1018',
-                   '1F COMPUTING FUNDAMENTALS COMPSCI1006',
-                    '1P (STANDARD ROUTE) COMPSCI1001',
-                    '1P (HALF COURSE) COMPSCI1005',
-                    '1PX (ALTERNATE ROUTE) COMPSCI1017',
-                    'FOUNDATIONS OF PROFESSIONAL SOFTWARE ENGINEERING COMPSCI1019',
-                    'HOW TO LEARN A NEW LANGUAGE COMPSCI1020',
-                    'PRACTICAL ALGORITHMS COMPSCI1021',
-                    'SPATIAL SKILLS TRAINING 1 COMPSCI1026',
-                    'TESTING AND SOFTWARE IMPROVEMENT COMPSCI1022',
-                    'WEB APPLICATION SYSTEMS COMPSCI1023',
-                    'WORKPLACE ASSESSMENT YEAR 1 COMPSCI1024')
-
-    ))
-)
-
 class Course(models.Model):
 #We have specified 30 for length of the name, but I will leave it 128 for now - can be changed.
     name = models.CharField(max_length=128, unique=True)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=1000)
     year_in_university = models.CharField(
         max_length=32,
         choices=YEAR_IN_UNI_CHOICES,
