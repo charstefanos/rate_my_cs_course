@@ -20,8 +20,8 @@ def postgraduate(request):
 def about(request):
     return render(request, 'csapp/about.html')
 
-def days(request):
-    return render(request, 'csapp/days.html')
+def opendays(request):
+    return render(request, 'csapp/opendays.html')
 
 def register(request):
     registered = False

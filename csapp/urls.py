@@ -11,7 +11,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('undergraduate/', views.undergraduate, name='undergraduate'),
     path('postgraduate/', views.postgraduate, name='postgraduate'),
-    path('days/', views.about, name='days'),
+    path('opendays/', views.opendays, name='opendays'),
     path('postgraduate/<slug:course_name_slug>', views.postgraduate_course, name='course'),
     path('undergraduate/<year>/<slug:course_name_slug>', views.undergraduate_course, name='course'),
 ]

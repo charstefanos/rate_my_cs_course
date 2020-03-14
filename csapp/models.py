@@ -80,8 +80,19 @@ class UofGStudent(UserProfile):
     courses = models.ManyToManyField(Course)
     contact = models.BooleanField()
 
+    class Meta:
+        verbose_name = 'UofG Student'
+        verbose_name_plural = 'Uofg Students'
+
 class NonStudent(UserProfile):
+
+    class Meta:
+        verbose_name = 'Non student'
+        verbose_name_plural = 'Non Students'
+        
     pass
+
+
 
 #Implemented rating as integers - to be conveted from the number of stars a user has chosen.
 class CourseRating(models.Model):
@@ -95,4 +106,9 @@ class CourseRating(models.Model):
     comment = models.CharField(max_length = 250, blank = True)
     def __str__(self):
         return self.overall_rating
+
+    class Meta:
+        verbose_name = 'Course Rating'
+        verbose_name_plural = 'Course Ratings'
+        
        

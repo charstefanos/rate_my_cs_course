@@ -1,0 +1,14 @@
+{% extends 'csapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Open Days Page
+{% endblock %}
+
+{% block body_block %}
+	This is the open days page!
+	{% if user.is_authenticated %}
+		Hi {{ user.username}}!
+	{% endif %}
+
+{% endblock %}

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <html>
 <head>
-<img src="{% static 'images/logo.png' %}"
+<a href="{% url 'csapp:home' %}"><img alt="Rate my CS Course Logo" src="{% static 'images/logo.png' %}"></a>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'css/base.css' %}" />
 </head>
@@ -13,8 +13,8 @@
   <a href="{% url 'csapp:undergraduate' %}">Undergraduate</a>
   <a href="{% url 'csapp:postgraduate' %}">Postgraduate</a>
   <a href="{% url 'csapp:about' %}">About us</a>
-  <a href="{% url 'csapp:days' %}">Open days</a>
-	<a href="{% url 'csapp:register' %}">Sign-Up</a>
+  <a href="{% url 'csapp:opendays' %}">Open days</a>
+  <a href="{% url 'csapp:register' %}">Sign-Up</a>
   <a href="{% url 'csapp:login' %}">Login</a>
   {% if user.is_authenticated %}
     <a href="{% url 'csapp:logout' %}">Logout</a>
