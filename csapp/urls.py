@@ -12,6 +12,7 @@ urlpatterns = [
     path('undergraduate/', views.undergraduate, name='undergraduate'),
     path('postgraduate/', views.postgraduate, name='postgraduate'),
     path('days/', views.about, name='days'),
-    path('postgraduate/<slug:course_name_slug>', views.postgraduate_course, name='course')
+    path('postgraduate/<slug:course_name_slug>', views.postgraduate_course, name='course'),
+    path('undergraduate/<year>/<slug:course_name_slug>', views.undergraduate_course, name='course'),
 ]
     

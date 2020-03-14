@@ -92,6 +92,16 @@ def postgraduate_course(request, course_name_slug):
     except Course.DoesNotExist:
         raise Http404("Course does not exist") 
     return render(request, 'csapp/course.html', {'course':course})
-
+    
+    
+def undergraduate_course(request, course_name_slug, year):
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+        #check if course has right corresponding year in URL
+        if course.year_in_university != year:
+            raise Http404("Course does not exist") 
+    except Course.DoesNotExist:
+        raise Http404("Course does not exist") 
+    return render(request, 'csapp/course.html', {'course':course})
     
 
