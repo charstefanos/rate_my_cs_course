@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from csapp.forms import UserForm, UserProfileForm
+from csapp.forms import UserForm, UserProfileForm, UserUpdateForm, ProfileUpdateForm
 from csapp.models import Course
 from django.http import Http404 
 
@@ -102,6 +103,23 @@ def undergraduate_course(request, course_name_slug, year):
     
 @login_required    
 def profile(request):
-    return render(request, 'csapp/profile.html')
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your profile has been updated!')
+            return redirect(reverse('csapp:profile'))
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.userprofile)
+    
+    context_dict = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'csapp/profile.html', context_dict)
     
 

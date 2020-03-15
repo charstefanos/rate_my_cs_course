@@ -9,18 +9,15 @@
 	<h2>Profile</h2>
 	<img src={{user.userprofile.picture.url}}>
 	<div>
-		<p> Username: 	{{user.username}} </p>
-		<p> First Name: {{user.userprofile.first_name}}</p>
-		<p> Last Name:	{{user.userprofile.last_name}}</p>
-		<p> Email:      {{user.userprofile.email}}</p>
-		<p> Current Student: {{user.userprofile.current_student}}</p>
-		<div>
-			{% if user.userprofile.current_student %}
-				<p> Year: {{user.userprofile.year_of_studies}}</p>
-			{% endif %}
-		</div>
-		<p> Courses: {{user.userprofile.courses}}</p>
-		<p> Countact: {{user.userprofile.contact}}</p>
-	
+		<form id="user_form" method="post" 
+			enctype="multipart/form-data">
+			
+			{% csrf_token %}
+			
+			{{ u_form.as_p }}
+			{{ p_form.as_p }}
+			
+			<button type="submit">Update</button>
+		</form>
 	</div>
 {% endblock %}

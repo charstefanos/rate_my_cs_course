@@ -28,6 +28,7 @@
 			<a href="{% url 'csapp:about' %}">About us</a>
 			<a href="{% url 'csapp:opendays' %}">Open days</a>
 			{% if user.is_authenticated %}
+				<a href="{% url 'csapp:profile' %}">Profile</a>
 				<a href="{% url 'csapp:logout' %}">Logout</a>
 			{% else %}
 				<a href="{% url 'csapp:register' %}">Sign-Up</a>
