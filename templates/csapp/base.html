@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
-<head>
-<a href="{% url 'csapp:home' %}"><img alt="Rate my CS Course Logo" src="{% static 'images/logo.png' %}"></a>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{% static 'css/base.css' %}" />
-</head>
-<body>
 
-<div class="topnav">
-  <a href="{% url 'csapp:home' %}">Home</a>
-  <a href="{% url 'csapp:undergraduate' %}">Undergraduate</a>
-  <a href="{% url 'csapp:postgraduate' %}">Postgraduate</a>
-  <a href="{% url 'csapp:about' %}">About us</a>
-  <a href="{% url 'csapp:opendays' %}">Open days</a>
-  {% if user.is_authenticated %}
-    <a href="{% url 'csapp:logout' %}">Logout</a>
-  {% else %}
-   <a href="{% url 'csapp:register' %}">Sign-Up</a>
-  <a href="{% url 'csapp:login' %}">Login</a>
-  {% endif %}
-	
-<input type="text" placeholder="Search..">
-</div>
-  
 <html>
 	<head>
+		<a href="{% url 'csapp:home' %}"><img alt="Rate my CS Course Logo" src="{% static 'images/logo.png' %}"></a>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+		<script src = "{% static 'js/jquery-3.4.1.min.js' %}"></script>
+		{% block js_block %}
+		{% endblock %}
+		
 		<title>
 			Rate my CS course -
 			{% block title_block %}
 				A WAD2 Group Project
 			{% endblock %}
 		</title>
+		
 	</head>
 	
 	<body>
+
+		<div class="topnav">
+			<a href="{% url 'csapp:home' %}">Home</a>
+			<a href="{% url 'csapp:undergraduate' %}">Undergraduate</a>
+			<a href="{% url 'csapp:postgraduate' %}">Postgraduate</a>
+			<a href="{% url 'csapp:about' %}">About us</a>
+			<a href="{% url 'csapp:opendays' %}">Open days</a>
+			{% if user.is_authenticated %}
+				<a href="{% url 'csapp:logout' %}">Logout</a>
+			{% else %}
+				<a href="{% url 'csapp:register' %}">Sign-Up</a>
+				<a href="{% url 'csapp:login' %}">Login</a>
+			{% endif %}
+	
+			<input type="text" placeholder="Search..">
+		</div>
+  
 		<div>
 		{% block body_block %}
 		{% endblock %}
 		</div>
+		
 	</body>
-
-<br/>
 
 </html>
 

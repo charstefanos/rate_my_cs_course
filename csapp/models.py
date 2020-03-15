@@ -26,7 +26,6 @@ class Course(models.Model):
         choices=YEAR_IN_UNI_CHOICES,
     )
     
-    
     slug = models.SlugField(unique=True)
     
     def save(self, *args, **kwargs):
@@ -42,9 +41,9 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include.
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
+    email = models.EmailField(max_length=30)
     picture = models.ImageField(upload_to='profile_images', blank=True)
-    current_student = models.BooleanField()
+    current_student = models.BooleanField(default = False)
     
     year_of_studies = models.CharField(
         max_length=32,
@@ -53,7 +52,7 @@ class UserProfile(models.Model):
         blank = True
     )
     courses = models.ManyToManyField(Course, blank = True)
-    contact = models.BooleanField(null = True, blank = True)
+    contact = models.BooleanField(default = False)
 
     class Meta:
         verbose_name = 'User Profile'
