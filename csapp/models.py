@@ -42,7 +42,7 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=30)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(default='default.jpg', upload_to='profile_images')
     current_student = models.BooleanField(default = False)
     
     year_of_studies = models.CharField(
