@@ -8,6 +8,7 @@ from csapp.forms import UserForm, UserProfileForm
 from csapp.models import Course
 from django.http import Http404 
 
+
 def home(request):
     return render(request, 'csapp/home.html')
 
@@ -93,9 +94,14 @@ def undergraduate_course(request, course_name_slug, year):
         course = Course.objects.get(slug=course_name_slug)
         #check if course has right corresponding year in URL
         if course.year_in_university != year:
-            raise Http404("Course does not exist") 
+            raise Http404("Wrong year") 
     except Course.DoesNotExist:
         raise Http404("Course does not exist") 
     return render(request, 'csapp/course.html', {'course':course})
+    
+    
+@login_required    
+def profile(request):
+    return render(request, 'csapp/profile.html')
     
 
