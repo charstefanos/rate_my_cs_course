@@ -13,7 +13,7 @@
 	
 	<h2>Register</h2>
 	{% if registered %}
-		Rango says: <strong>You have successfully registered!</strong>
+		<strong>You have successfully registered!</strong>
 		<br/>
 	{% else %}
 		<form id="user_form" method="post" action="{% url 'csapp:register' %}"

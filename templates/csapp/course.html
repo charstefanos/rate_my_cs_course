@@ -1,14 +1,63 @@
+
 {% extends 'csapp/base.html' %}
 {% load staticfiles %}
-
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .checked {
+      color: orange;
+    }
+    </style>
+    </head>
+    <body>
 {% block title_block %}
-	{{course.name}}
+	{{ course.name}}
 {% endblock %}
 
 {% block body_block %}
-	{{course.description}}
-	{% if user.is_authenticated %}
-		Hi {{ user.username}}!
-	{% endif %}
+    <h2 xmlns="http://www.w3.org/1999/html">{{course.name}}</h2>
+    {% if course %}
+        <div>
+            {% csrf_token %}
+            <p>Description: {{ course.description }}</p>
+            <p>Year: {{ course.year_in_university }}</p>
+        </div>
+    {% endif %}
 
+    <h3>Reviews</h3>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div id ='reviewdescription'?>
+                
+                <p><strong>{{ review.student }}</strong></p>
+                <strong>Lectuter Rating:</strong>
+                {% for i in 1..5 %}
+                    {% if review.lecturer_rating >= i %}
+                        <span class="fa fa-star checked">
+                    {% endif %}
+                    <span class="fa fa-star"></span>
+                {% endfor %}
+                <strong>Engagement:</strong>
+                {% for i in 1..5 %}
+                    {% if review.engagement >= i %}
+                        <span class="fa fa-star checked">
+                    {% endif %}
+                    <span class="fa fa-star"></span>
+                {% endfor %}<br>
+                <strong>Informative:</strong>
+                {% for i in 1..5 %}
+                    {% if review.lecturer_rating >= i %}
+                        <span class="fa fa-star checked">
+                    {% endif %}
+                    <span class="fa fa-star"></span>
+                {% endfor %}<br>
+                {% if review.comment %}
+                    Review:
+                        {{ review.comment }}<br>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+                <div class="about"><strong>There are no reviews yet.</strong></div>
+        {% endif %}
+            </div>
 {% endblock %}

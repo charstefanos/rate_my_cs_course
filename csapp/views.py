@@ -1,17 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
-from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from csapp.forms import UserForm, UserProfileForm, UserUpdateForm, ProfileUpdateForm
-from csapp.models import Course
+from csapp.forms import *
+from csapp.models import *
 from django.http import Http404 
 
 
 def home(request):
-    return render(request, 'csapp/home.html')
+    context_dict = {}
+    courses = Course.objects.all()
+    context_dict['courses'] = courses
+
+    return render(request, 'csapp/home.html', context=context_dict)
 
 def undergraduate(request):
     return render(request, 'csapp/undergraduate.html')
@@ -81,24 +84,50 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('csapp:home'))
-    
+
+#for the chosen course to be displayed   
 def postgraduate_course(request, course_name_slug):
+    context_dict = {}
     try:
         course = Course.objects.get(slug=course_name_slug)
+        context_dict['course'] = course
+        context_dict['description'] = course.description
+        #student = UserProfile.objects.get(user=request.user)
+        #context_dict['student'] = student
+        reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
+        if len(reviews) > 0:
+            context_dict['lecturer_rating'] = lecturer_rating
+            context_dict['engagement'] = engagement
+            context_dict['informative'] = informative
+            context_dict['comment'] = comment
     except Course.DoesNotExist:
         raise Http404("Course does not exist") 
-    return render(request, 'csapp/course.html', {'course':course})
+    return render(request, 'csapp/course.html', context=context_dict)
     
-    
-def undergraduate_course(request, course_name_slug, year):
+#for the chosen course to be displayed     
+def undergraduate_course(request, course_name_slug):
+    context_dict = {}
     try:
         course = Course.objects.get(slug=course_name_slug)
         #check if course has right corresponding year in URL
-        if course.year_in_university != year:
-            raise Http404("Wrong year") 
+        if False:
+            raise Http404("Wrong year")
+        else:
+            #student = User.objects.get(username=request.user)
+            #context_dict['student'] = student
+            context_dict['course'] = course
+            context_dict['description'] = course.description
+            reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
+            #context_dict['year'] = year
+            if len(reviews) > 0:
+                context_dict['lecturer_rating'] = lecturer_rating
+                context_dict['engagement'] = engagement
+                context_dict['informative'] = informative
+                context_dict['comment'] = comment  
     except Course.DoesNotExist:
+        context_dict['errors'] = 'This course does not exist'
         raise Http404("Course does not exist") 
-    return render(request, 'csapp/course.html', {'course':course})
+    return render(request, 'csapp/course.html', context=context_dict)
     
     
 @login_required    

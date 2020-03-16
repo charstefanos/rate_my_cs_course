@@ -11,4 +11,9 @@
 		Hi {{ user.username}}!
 	{% endif %}
 
+	{% if courses %}
+		{% for course in courses %}
+			<a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
+		{% endfor %}
+	{% endif %}
 {% endblock %}

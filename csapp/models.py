@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 #The list of available options organised into two groups. Contains tuples (value, human-readable name).
 YEAR_IN_UNI_CHOICES = (
@@ -63,10 +65,11 @@ class CourseRating(models.Model):
     #two foreign keys - for the student and the course (one-to-many relationships)
     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    overall_rating = models.IntegerField(default=0)
-    lecturer_rating = models.IntegerField(default=0)
-    engagement = models.IntegerField(default=0)
-    informative = models.IntegerField(default=0)
+    # changed the values of the rating so they can only choose between 1 and 5
+    overall_rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
+    lecturer_rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
+    engagement = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
+    informative = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     comment = models.CharField(max_length = 250, blank = True)
     def __str__(self):
         return self.overall_rating
