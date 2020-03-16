@@ -61,6 +61,12 @@ def register(request):
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
                              'registered': registered})
+
+def load_courses(request):
+    year_of_studies = request.GET.get('year_of_studies')
+    courses = Course.objects.filter(year_in_university = year_of_studies).order_by('name')
+    return render(request, 'csapp/courses_dropdown_list.html', {'courses': courses})
+    
                              
 def user_login(request):
     if request.method == 'POST':

@@ -3,6 +3,7 @@
 
 {% block js_block %}
 	<script src="{% static 'js/csapp-onClickCurrentStudent.js' %}"></script>
+	<script src="{% static 'js/csapp-filterCourses.js' %}"></script>
 {% endblock %}
 
 {% block title_block %}
@@ -16,7 +17,7 @@
 		<strong>You have successfully registered!</strong>
 		<br/>
 	{% else %}
-		<form id="user_form" method="post" action="{% url 'csapp:register' %}"
+		<form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}"
 			enctype="multipart/form-data">
 			
 			{% csrf_token %}
@@ -49,7 +50,7 @@
 				{{ profile_form.year_of_studies.label }}
 				{{ profile_form.year_of_studies }} </p>
 				
-				<p id="courses_list"> {{ profile_form.courses.errors }}
+				<p> {{ profile_form.courses.errors }}
 				{{ profile_form.courses.label }}
 				{{ profile_form.courses }} </p>
 				

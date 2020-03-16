@@ -38,8 +38,20 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
             #'current_student' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
             #'contact' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
-            'courses' : forms.CheckboxSelectMultiple(),
+            'courses' : forms.SelectMultiple(),
             }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['courses'].queryset = Course.objects.none()
+
+        if 'year_of_studies' in self.data:
+            try:
+                yearOfStudies = int(self.data.get('year_of_studies'))
+                self.fields['courses'].queryset = Course.objects.filter(year_in_university = yearOfStudies).order_by('name')
+            except (ValueError, TypeError):
+                pass
+        
 class UserUpdateForm(forms.ModelForm):
     
     class Meta:
