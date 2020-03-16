@@ -6,17 +6,11 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 #The list of available options organised into two groups. Contains tuples (value, human-readable name).
 YEAR_IN_UNI_CHOICES = (
-    ('Undergraduate', (
-            ('UNDERGRAD_1YEAR', 'Undergraduate (year 1)'),
-            ('UNDERGRAD_2YEAR', 'Undergraduate (year 2)'),
-            ('UNDERGRAD_3YEAR', 'Undergraduate (year 3)'),
-            ('UNDERGRAD_4YEAR', 'Undergraduate (year 4)'),
-        )
-    ),
-    ('Postgraduate', (
-            ('POSTGRAD', 'Postgraduate'),
-        )
-    ),
+    (1, 'Undergraduate (year 1)'),
+    (2, 'Undergraduate (year 2)'),
+    (3, 'Undergraduate (year 3)'),
+    (4, 'Undergraduate (year 4)'),
+    (5, 'Postgraduate'),
     )
 
 class Course(models.Model):
@@ -44,11 +38,10 @@ class UserProfile(models.Model):
     picture = models.ImageField(default='default.jpg', upload_to='profile_images')
     current_student = models.BooleanField(default = False)
     
-    year_of_studies = models.CharField(
-        max_length=32,
+    year_of_studies = models.IntegerField(
         choices=YEAR_IN_UNI_CHOICES,
         null = True,
-        blank = True
+        blank = True,
     )
     courses = models.ManyToManyField(Course, blank = True)
     contact = models.BooleanField(default = False)
