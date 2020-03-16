@@ -104,7 +104,9 @@ def postgraduate_course(request, course_name_slug):
         raise Http404("Course does not exist") 
     return render(request, 'csapp/course.html', context=context_dict)
     
-#for the chosen course to be displayed     
+#for the chosen course to be displayed  
+#@Stefanos: I removed the year parameter as it wasnt running but i will try and figure it
+# out later   
 def undergraduate_course(request, course_name_slug):
     context_dict = {}
     try:
