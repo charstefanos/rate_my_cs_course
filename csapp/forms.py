@@ -48,7 +48,8 @@ class UserProfileForm(forms.ModelForm):
         if 'year_of_studies' in self.data:
             try:
                 yearOfStudies = int(self.data.get('year_of_studies'))
-                self.fields['courses'].queryset = Course.objects.filter(year_in_university = yearOfStudies).order_by('name')
+                print(yearOfStudies)
+                self.fields['courses'].queryset = Course.objects.filter(year_in_university__lte = yearOfStudies).order_by('name')
             except (ValueError, TypeError):
                 pass
         
