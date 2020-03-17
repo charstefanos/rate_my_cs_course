@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.core.validators import MaxValueValidator, MinValueValidator
+from PIL import Image
 
 
 #The list of available options organised into two groups. Contains tuples (value, human-readable name).
@@ -52,6 +53,18 @@ class UserProfile(models.Model):
         
     def __str__(self):
         return self.user.username
+        
+    def save(self):
+        super().save()
+        
+        img = Image.open(self.picture.path)
+        
+        if img.height>300 or img.width>300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.picture.path)
+            
+        
     
 #Implemented rating as integers - to be conveted from the number of stars a user has chosen.
 class CourseRating(models.Model):
