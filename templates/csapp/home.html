@@ -7,11 +7,6 @@ Homepage
 
 {% block body_block %}
 
-<!--{% if courses %}
-    {% for course in courses %}
-    <a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
-    {% endfor %}
-{% endif %}-->
 <!--- Image Slider -->
 <div id="slides" class="carousel slide" data-ride="carousel">
     <ul class="carousel-indicators">
@@ -77,7 +72,16 @@ Homepage
         <div class="col-xs-12 col-sm-6 col-md-4">
             <i class="fas fa-fire"></i>
             <h3>Most Viewed Courses</h3>
-            <p>Top 5</p>
+            {% if courses %}
+            <ul>
+            {% for course in courses %}
+            <li>
+                <a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+            
         </div>
         <div class="col-sm-12 col-md-4">
             <i class="fas fa-question-circle"></i>

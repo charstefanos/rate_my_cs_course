@@ -18,7 +18,7 @@ class Course(models.Model):
     name = models.CharField(max_length=128, unique=True)
     description = models.CharField(max_length=1000)
     year_in_university = models.IntegerField(default=0)
-    
+    views = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
     
     def save(self, *args, **kwargs):

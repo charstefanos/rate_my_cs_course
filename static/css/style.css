@@ -75,6 +75,19 @@ footer{
     width: 350px;
     padding: 2rem;
 }
+ul{
+    list-style-type:none;
+    padding: 0.1rem;
+}
+li a:link, a:visited, a:active{
+    color: #8e8e8e;
+    text-decoration: none;
+}
+li a:hover{
+    color: #800080;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 
 /*--- Bootstrap Padding Fix --*/

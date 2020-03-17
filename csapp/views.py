@@ -11,8 +11,8 @@ from django.http import Http404
 
 def home(request):
     context_dict = {}
-    courses = Course.objects.all()
-    context_dict['courses'] = courses
+    course_list = Course.objects.order_by('-views')[:5]
+    context_dict['courses'] = course_list
 
     return render(request, 'csapp/home.html', context=context_dict)
 

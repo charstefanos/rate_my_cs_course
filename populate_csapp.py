@@ -10,16 +10,20 @@ def populate():
     undergraduate_1year_courses = [
         {'name': '1CT INTRODUCTION TO COMPUTATIONAL THINKING COMPSCI1016', 
         'description': 'Computational processes are increasingly being discovered in natural, social and economic systems as well as typical silicon-based computing devices such as laptops and smartphones. For those with little or no previous computing education, this course develops the necessary understanding and thinking skills so that such systems can be viewed as predictable, understandable and ultimately controllable. It is valuable in its own right, as an underpinning now required in many other disciplines, and as a foundation for further study in Computing Science.',
-        'year_in_university': 1},
+        'year_in_university': 1,
+        'views' : 5},
         {'name': '1S SYSTEMS COMPSCI1018', 
         'description': 'CS1S introduces the fundamentals of computer systems, including representation of information, digital circuits, processor organisation, machine language, and the relation between hardware and software systems.',
-        'year_in_university': 1},
+        'year_in_university': 1,
+        'views' : 4},
         {'name':'1F - COMPUTING FUNDAMENTALS COMPSCI1006',
         'description':'The aim of the CS1F course is to give students an understanding of human-computer interaction (styles of interaction, requirements for an interactive system in relation to the nature of the tasks being supported, issues in the design of interactive systems, critical assessment of designs); the ways in which databases contribute to the management of large amounts of data, the professional and ethical issues raised by the existence of databases and networks.',
-        'year_in_university': 1},
+        'year_in_university': 1,
+        'views' : 2},
         {'name':'COMPUTING SCIENCE 1P (STANDARD ROUTE) COMPSCI1001',
         'description':'The CS1P course is designed for students with good foundational computational thinking skills - that is, a solid understanding of basic programming concepts and the ability to solve simple unseen programming problems from scratch with no assistance. The course reviews this foundation and then builds on it by developing students ability to reason about elements of the software development process, including for example, complexity of algorithms, rigorous testing techniques and problem solving methodologies.',
-        'year_in_university': 1},
+        'year_in_university': 1,
+        'views' : 10},
         {'name':'COMPUTING SCIENCE 1P (HALF COURSE) COMPSCI1005',
         'description':'The aim of the CS1P (Half) course is to produce programmers equipped with an understanding of: Fundamental computational concepts underlying most programming languages; A range of problem-solving techniques using computers; The skills supporting the solution of small problems using a programming language; The clear expression of solutions at different levels of abstraction.',
         'year_in_university': 1},
@@ -148,7 +152,8 @@ def populate():
         'year_in_university':4},
         {'name':'INDIVIDUAL PROJECT (H) (SINGLE) COMPSCI4025P',
         'description':'The aim of the individual project is to allow students to undertake a substantial piece of individual work, involving planning, specification, design, execution, evaluation, presentation and report-writing.',
-        'year_in_university':4},
+        'year_in_university':4,
+        'views' : 7},
         {'name':'INDIVIDUAL PROJECT (SIT) SIT4027P',
         'description':'The aim of the individual project is to allow students to undertake a substantial piece of individual work, involving planning, specification, design, execution, evaluation, presentation and report-writing.',
         'year_in_university':4},
@@ -199,7 +204,8 @@ def populate():
         'year_in_university':4},
         {'name':'SAFETY CRITICAL SYSTEMS DEVELOPMENT (SIT) SIT4034',
         'description':'This course encourages students to apply engineering techniques to support the development of safety-critical applications. It also encourages students to consider the particular methodological and professional issues that surround the development of safety-critical systems.',
-        'year_in_university':4},
+        'year_in_university':4,
+        'views' : 8},
         {'name':'SAFETY-CRITICAL SYSTEMS DEVELOPMENT (H) COMPSCI4045',
         'description':'This course encourages students to apply engineering techniques to support the development of safety-critical applications. It also encourages students to consider the particular methodological and professional issues that surround the development of safety-critical systems.',
         'year_in_university':4},
@@ -366,17 +372,21 @@ def populate():
     # The code below goes through the all_courses list, then for each sublist, adds the courses.
     for cat in all_courses:
         for course in cat:
-            add_course(course['name'], course['description'], course['year_in_university'])
+            if 'views' in course.keys():
+                add_course(course['name'], course['description'], course['year_in_university'], course['views'] )
+            else:
+                add_course(course['name'], course['description'], course['year_in_university'])
             
     # Print out the courses we have added.
     for c in Course.objects.all():
             print(f'{c}')
 
 
-def add_course(name, description, year_in_university):
+def add_course(name, description, year_in_university,views=0):
     c = Course.objects.get_or_create(name=name)[0]
     c.description=description
     c.year_in_university=year_in_university
+    c.views=views
     c.save()
     return c
 
