@@ -79,10 +79,12 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('csapp:home'))
             else:
-                return HttpResponse("Your account is disabled")
+                messages.error(request, 'Your account is disabled')
+                return redirect(reverse('csapp:login'))
+            
         else:
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            messages.error(request, 'Invalid login details supplied. Please try again.')
+            return redirect(reverse('csapp:login'))
     else:
         return render(request, 'csapp/login.html')
 
@@ -141,22 +143,40 @@ def undergraduate_course(request, course_name_slug):
 @login_required    
 def profile(request):
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
         
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your profile has been updated!')
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, f'Your profile was updated successfully!')
             return redirect(reverse('csapp:profile'))
     else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.userprofile)
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = UserProfileForm(instance=request.user.userprofile)
     
     context_dict = {
-        'u_form': u_form,
-        'p_form': p_form
+        'user_form': user_form,
+        'profile_form': profile_form
     }
     return render(request, 'csapp/profile.html', context_dict)
+
+@login_required
+def delete_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        messages.success(request, f'Your profile has been deleted successfully!')
+        return redirect(reverse('csapp:login'))
+    else:
+        user_delete_form = UserDeleteForm(instance=request.user)
+
+    context_dict = {
+        'user_delete_form': user_delete_form
+    }
+
+    return render(request, 'csapp/profile.html', context_dict)
+    
+
     
 

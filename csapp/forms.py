@@ -13,10 +13,20 @@ class UserForm(forms.ModelForm):
             'username': None,
             }
 
-TRUE_FALSE_CHOICES = (
-    (True, 'Yes'),
-    (False, 'No')
-)
+class UserUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username']
+
+        help_texts = {
+            'username': None,
+            }
+
+class UserDeleteForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = []
 
 class UserProfileForm(forms.ModelForm):
 
@@ -36,8 +46,6 @@ class UserProfileForm(forms.ModelForm):
             }
 
         widgets = {
-            #'current_student' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
-            #'contact' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
             'courses' : forms.SelectMultiple(),
             }
 
@@ -52,36 +60,9 @@ class UserProfileForm(forms.ModelForm):
                 self.fields['courses'].queryset = Course.objects.filter(year_in_university__lte = yearOfStudies).order_by('name')
             except (ValueError, TypeError):
                 pass
-        
-class UserUpdateForm(forms.ModelForm):
-    
-    class Meta:
-        model = User
-        fields = ['username']
-
-        help_texts = {
-            'username': None,
-            }
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('first_name','last_name','email','picture','current_student','year_of_studies','courses','contact')
-        
-        labels = {
-            'first_name': 'First name',
-            'last_name' : 'Surname',
-            'email' : 'Email',
-            'current_student' : 'Are you currently a student at University of Glasgow?',
-            'year_of_studies' : 'What year are you currently in?',
-            'courses' : 'What courses did you take',
-            'contact' : 'Would you like your name and email to be visible for others to see?',
-            }
-
-        widgets = {
-            'current_student' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
-            'contact' : forms.RadioSelect(choices = TRUE_FALSE_CHOICES),
-            'courses' : forms.CheckboxSelectMultiple(),
-            }
+        elif self.instance.pk:
+            if(self.instance.year_of_studies != None):
+                self.fields['courses'].queryset = Course.objects.filter(year_in_university__lte = self.instance.year_of_studies).order_by('name')
 
 #This is some testing for the reviews but havent been tested yet
 class ReviewForm(forms.ModelForm):

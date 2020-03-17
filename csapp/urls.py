@@ -17,6 +17,7 @@ urlpatterns = [
     #@Stefanos: I removed the year parameter as it wasnt running but i will try and figure it
     # out later
     path('undergraduate/<slug:course_name_slug>', views.undergraduate_course, name='course'),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('profile/delete', views.delete_profile, name='delete_profile'),
 ]
     

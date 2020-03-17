@@ -6,6 +6,18 @@ Login
 {% endblock %}
 
 {% block body_block %}
+
+{% if messages %}
+	{% for message in messages %}
+		{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+			{{ message }}
+		{% endif %}
+		{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+			{{ message }}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
 <div class="container-form">
     <h3>Login</h3>
     <form class="form-signin" id="login_form" role="form" method="post" action="{% url 'csapp:login' %}">
@@ -23,4 +35,3 @@ Login
 </div>
 
 {% endblock %}
-
