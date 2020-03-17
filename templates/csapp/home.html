@@ -46,49 +46,51 @@ Homepage
         <div class="col-12">
             {% if user.is_authenticated %}
             <h1 class="display-4">Hi, {{ user.username}}!</h1>
-            </div>
+        </div>
         <hr>
         <div class="col-12">
             <p class="lead">Go to your profile and leave a review.</p>
         </div>
-            {% else %}
-            <h1 class="display-4"> Something.<h1>
-            </div>
+        {% else %}
+        <h1 class="display-4"> Something.<h1>
+        </div>
         <hr>
         <div class="col-12">
             <p class="lead">Some random text explaining something.</p>
         </div>
-            {% endif %}
-    </div>
-</div>
-<!---Three column section--->
-<div class="container-fluid padding">
-    <div class="row text-center padding">
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <i class="fas fa-star"></i>
-            <h3>Top Rated Courses</h3>
-            <p>Top 5</p>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <i class="fas fa-fire"></i>
-            <h3>Most Viewed Courses</h3>
-            {% if courses %}
-            <ul>
-            {% for course in courses %}
-            <li>
-                <a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
-            </li>
-            {% endfor %}
-        </ul>
         {% endif %}
-            
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <i class="fas fa-question-circle"></i>
-            <h3>For More Information...</h3>
-            <p>Register to be able to see additional indormation.</p>
         </div>
     </div>
-    <hr class="my-4">
-</div>
-{% endblock %}
+    <!---Three column section--->
+    <div class="main">
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <i class="fas fa-star"></i>
+                    <h3>Top Rated Courses</h3>
+                    <p>Top 5</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <i class="fas fa-fire"></i>
+                    <h3>Most Viewed Courses</h3>
+                    {% if courses %}
+                    <ul>
+                        {% for course in courses %}
+                        <li>
+                            <a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>For More Information...</h3>
+                    <p>Register to be able to see additional indormation.</p>
+                </div>
+            </div>
+            <hr class="my-4">
+        </div>
+    </div>
+    {% endblock %}

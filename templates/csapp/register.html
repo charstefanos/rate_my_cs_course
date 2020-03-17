@@ -2,65 +2,67 @@
 {% load staticfiles %}
 
 {% block js_block %}
-	<script src="{% static 'js/csapp-onClickCurrentStudent.js' %}"></script>
-	<script src="{% static 'js/csapp-filterCourses.js' %}"></script>
+<script src="{% static 'js/csapp-onClickCurrentStudent.js' %}"></script>
+<script src="{% static 'js/csapp-filterCourses.js' %}"></script>
 {% endblock %}
 
 {% block title_block %}
-	Register
+Register
 {% endblock %}
 
 {% block body_block %}
-	
-	<h2>Register</h2>
-	{% if registered %}
-		<strong>You have successfully registered!</strong>
-		<br/>
-	{% else %}
-		<form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}"
-			enctype="multipart/form-data">
-			
-			{% csrf_token %}
-			
-			{{ user_form.as_p }}
-			
-			<p> {{ profile_form.first_name.errors }} 
+
+<h2>Register</h2>
+{% if registered %}
+<strong>You have successfully registered!</strong>
+<br/>
+{% else %}
+<div class="container-form">
+    <form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}"
+    enctype="multipart/form-data">
+        
+        {% csrf_token %}
+        
+        {{ user_form.as_p }}
+        
+        <p> {{ profile_form.first_name.errors }} 
 			{{ profile_form.first_name.label}}
-			{{ profile_form.first_name }} </p>
-			
-			<p> {{ profile_form.last_name.errors }}
+        {{ profile_form.first_name }} </p>
+        
+        <p> {{ profile_form.last_name.errors }}
 			{{ profile_form.last_name.label}}
-			{{ profile_form.last_name }} </p>
-			
-			<p> {{ profile_form.email.errors }}
+        {{ profile_form.last_name }} </p>
+        
+        <p> {{ profile_form.email.errors }}
 			{{ profile_form.email.label}}
-			{{ profile_form.email }} </p>
-			
-			<p> {{ profile_form.picture.errors }}
+        {{ profile_form.email }} </p>
+        
+        <p> {{ profile_form.picture.errors }}
 			{{ profile_form.picture.label }}
-			{{ profile_form.picture }} </p>
-			
-			<p> {{ profile_form.current_student.errors }}
+        {{ profile_form.picture }} </p>
+        
+        <p> {{ profile_form.current_student.errors }}
 			{{ profile_form.current_student.label }}
-			{{ profile_form.current_student }} </p>
-				
-			<div id="current_student_fields" hidden>
+        {{ profile_form.current_student }} </p>
+        
+        <div id="current_student_fields" hidden>
 			
-				<p> {{ profile_form.year_of_studies.errors }}
+            <p> {{ profile_form.year_of_studies.errors }}
 				{{ profile_form.year_of_studies.label }}
-				{{ profile_form.year_of_studies }} </p>
-				
-				<p> {{ profile_form.courses.errors }}
+            {{ profile_form.year_of_studies }} </p>
+            
+            <p> {{ profile_form.courses.errors }}
 				{{ profile_form.courses.label }}
-				{{ profile_form.courses }} </p>
-				
-				<p> {{ profile_form.contact.errors }}
+            {{ profile_form.courses }} </p>
+            
+            <p> {{ profile_form.contact.errors }}
 				{{ profile_form.contact.label }}
-				{{ profile_form.contact }} </p>
+            {{ profile_form.contact }} </p>
 			
-			</div>
-			
-			<input type="submit" name="submit" value="Submit" />
-		</form>
-	{% endif %}
+        </div>
+        
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+</div>
+{% endif %}
 {% endblock %}

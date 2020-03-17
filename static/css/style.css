@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
 html, body{
-    height: 100%;
     width: 100%;
     font-family: 'Poppins', sans-serif;
     color: #222;
 }
+html {
+    position:relative;
+    min-height: 100%;
+}
 body{
-    padding-bottom: 60px;
+    margin-bottom: 60px;
 }
 .navbar{
     padding: 0.8rem;
@@ -65,29 +68,50 @@ body{
     color: #800080;
     margin: 1rem;
 }
-
 footer{
     background-color: #8e8e8e;
     color: #d5d5d5;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
 }
 
-.container{
+.container-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     width: 350px;
     padding: 2rem;
 }
-ul{
+.main ul{
     list-style-type:none;
     padding: 0.1rem;
 }
-li a:link, a:visited, a:active{
+.main li a:link, a:visited, a:active{
     color: #8e8e8e;
     text-decoration: none;
 }
-li a:hover{
+.main li a:hover{
     color: #800080;
     text-decoration: none;
     font-weight: bold;
 }
+
+.navbar input[type=text] {
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  border-radius: 25px;
+  height: 30px;
+}
+.navbar input[type=text].active{
+    border: none;
+    border-radius: 25px;
+}
+
 
 
 /*--- Bootstrap Padding Fix --*/
