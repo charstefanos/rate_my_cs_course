@@ -52,7 +52,7 @@ class UserProfile(models.Model):
         
     def __str__(self):
         return self.user.username
-    
+
 #Implemented rating as integers - to be conveted from the number of stars a user has chosen.
 class CourseRating(models.Model):
     #two foreign keys - for the student and the course (one-to-many relationships)

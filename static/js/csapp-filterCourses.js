@@ -1,4 +1,5 @@
  $(document).ready(function(){
+	 $.ajaxSetup({ cache: false });
 	 $("#id_year_of_studies").change(function () {
 		var url = $("#user_form").attr("data_courses_url");  
 		var yearOfStudies = $(this).val();  
