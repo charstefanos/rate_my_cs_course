@@ -6,9 +6,6 @@ Homepage
 {% endblock %}
 
 {% block body_block %}
-{% if user.is_authenticated %}
-Hi {{ user.username}}!
-{% endif %}
 
 <!--{% if courses %}
     {% for course in courses %}
@@ -52,12 +49,21 @@ Hi {{ user.username}}!
 <div class="container-fluid padding">
     <div class="row welcome text-center">
         <div class="col-12">
-            <h1 class="display-4"> Something.<h1>
-        </div>
+            {% if user.is_authenticated %}
+            <h1 class="display-4">Hi, {{ user.username}}!</h1>
+            </div>
         <hr>
         <div class="col-12">
-            <p class="lead"> Some random text explaining something.</p>
+            <p class="lead">Go to your profile and leave a review.</p>
         </div>
+            {% else %}
+            <h1 class="display-4"> Something.<h1>
+            </div>
+        <hr>
+        <div class="col-12">
+            <p class="lead">Some random text explaining something.</p>
+        </div>
+            {% endif %}
     </div>
 </div>
 <!---Three column section--->

@@ -65,25 +65,25 @@
                             <a class="nav-link" href="{% url 'csapp:login' %}">Login</a>
                         </li>
                         {% endif %}
-                    </ul>    
+                        </ul>    
+                    </div>
                 </div>
+            </nav>
+            
+            <div>
+                {% block body_block %}
+                {% endblock %}
             </div>
-        </nav>
-        
-        <div>
-            {% block body_block %}
-            {% endblock %}
-        </div>
-        
-    </body>
-    <footer>
-        <div class="container-fluid padding">
-            <div class="row text-center">
-                <div class="col-12">
-                    <p>All rights reserved.<p>
-                </div>
-            </div>
-        </div>
-    </footer>
-</html>
-
+            <footer>
+                <div class="container-fluid padding">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <p>All rights reserved.<p>
+                            </div>
+                            </div>
+                        </div>
+                    </footer>
+                </body>
+            </html>
+            
+                
