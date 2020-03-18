@@ -107,7 +107,8 @@ footer{
   margin-right: 16px;
   border-radius: 25px;
   height: 30px;
-  outline-style: none; 
+  outline-style: none;
+  padding-left: 10px;
 }
 #searchBar{
     width: 250px;
