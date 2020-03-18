@@ -66,7 +66,6 @@ def load_courses(request):
     year_of_studies = request.GET.get('year_of_studies')
     courses = Course.objects.filter(year_in_university__lte = year_of_studies).order_by('-year_in_university')
     return render(request, 'csapp/courses_dropdown_list.html', {'courses': courses})
-    
                              
 def user_login(request):
     if request.method == 'POST':

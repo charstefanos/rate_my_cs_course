@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	$.ajaxSetup({ cache: false });
-	
 	var courses = [
 	{label:"1CT INTRODUCTION TO COMPUTATIONAL THINKING", value: "undergraduate/1ct-introduction-to-computational-thinking-compsci1016"}, // Is there a way to not harcode this?
 	"1S SYSTEMS",
@@ -121,7 +120,7 @@ $(document).ready(function(){
 	$( "#searchBar" ).autocomplete({
 		source: function(request, response) {
 			var results = $.ui.autocomplete.filter(courses, request.term);
-			response(results.slice(0, 10));
+			response(results);
 		},
 		select: function( event, ui ) { 
 			window.location.pathname = "ratemycscourse/" + ui.item.value;
