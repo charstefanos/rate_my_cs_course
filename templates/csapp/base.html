@@ -13,7 +13,12 @@
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
         <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 		
+		<!-- jQuery and jQuery UI -->
+		<link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.min.css' %}" type="text/css" />
 		<script src = "{% static 'js/jquery-3.4.1.min.js' %}"></script>
+		<script src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
+		<script src="{% static 'js/csapp-searchBarAutocomplete.js' %}"></script>
+		
 		{% block js_block %}
 		{% endblock %}
 		
@@ -66,7 +71,7 @@
                         </li>
                         {% endif %}
                         <li class="nav-item">
-                            <input type="text" placeholder="Search..">
+                            <input id="searchBar" type="text" placeholder="Search..">
                         </li>
                     </ul>    
                 </div>

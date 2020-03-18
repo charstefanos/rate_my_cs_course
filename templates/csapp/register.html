@@ -20,7 +20,8 @@ Register
 <div class="container-form">
     <form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}"
     enctype="multipart/form-data">
-        
+	
+		
         {% csrf_token %}
         
         {{ user_form.as_p }}
