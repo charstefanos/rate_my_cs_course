@@ -124,7 +124,7 @@ $(document).ready(function(){
 			response(results.slice(0, 10));
 		},
 		select: function( event, ui ) { 
-			window.location.href = "ratemycscourse/" + ui.item.value;
+			window.location.pathname = "ratemycscourse/" + ui.item.value;
         }
 		
 	});
