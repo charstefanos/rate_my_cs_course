@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from csapp.forms import *
 from csapp.models import *
-from django.http import Http404 
-
+from django.http import Http404
+from django.http import JsonResponse
 
 def home(request):
     context_dict = {}
@@ -176,6 +176,30 @@ def delete_profile(request):
     }
 
     return render(request, 'csapp/profile.html', context_dict)
+
+def search(request):
+    courses = Course.objects.all()
+
+    coursesList = []
+    for course in courses:
+        courseDictionary = {}
+        name = course.name
+        year = course.year_in_university
+        if year <= 4:
+            courseType = "undergraduate"
+        else:
+            courseType = "postgraduate"
+        courseSlug = course.slug
+        
+        url = courseType + "/" + courseSlug
+        
+        courseDictionary["label"] = name
+        courseDictionary["value"] = url
+        coursesList.append(courseDictionary)
+
+    return JsonResponse(coursesList, safe=False)
+    
+    
     
 
     

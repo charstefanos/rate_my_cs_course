@@ -19,5 +19,6 @@ urlpatterns = [
     path('undergraduate/<slug:course_name_slug>', views.undergraduate_course, name='course'),
     path('profile/', views.profile, name='profile'),
     path('profile/delete', views.delete_profile, name='delete_profile'),
+    path('search/', views.search, name='search'),
 ]
     
