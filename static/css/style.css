@@ -150,12 +150,17 @@ footer{
 }
 .ui-autocomplete.ui-menu {
     width: 250px;
-    max-height: 150px;
+    max-height: 200px;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 5px;
     z-index: 9999;
-    background-color: rgba(249,249,249);
+    background-color: rgba(249,249,249,0.95);
+}
+.ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+    background-color: #cccccc !important;
+    color: black !important;
+    border-color: #e6e6e6 !important;
 }
 
 /*--- Bootstrap Padding Fix --*/
