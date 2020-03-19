@@ -17,10 +17,34 @@ def home(request):
     return render(request, 'csapp/home.html', context=context_dict)
 
 def undergraduate(request):
-    return render(request, 'csapp/undergraduate.html')
+    coursesDict = {}
+    courses = Course.objects.all()
+
+    for course in courses:
+        if course.year_in_university <= 4:
+            name = course.name
+            year = course.year_in_university
+            courseSlug = course.slug
+            
+            courseList = [year,courseSlug]
+            coursesDict[name] = courseList
+        
+    return render(request, 'csapp/undergraduate.html', {'courses': coursesDict})
 
 def postgraduate(request):
-    return render(request, 'csapp/postgraduate.html')
+    coursesDict = {}
+    courses = Course.objects.all()
+
+    for course in courses:
+        if course.year_in_university == 5:
+            name = course.name
+            year = course.year_in_university
+            courseSlug = course.slug
+            
+            courseList = [year,courseSlug]
+            coursesDict[name] = courseList
+
+    return render(request, 'csapp/postgraduate.html', {'courses': coursesDict})
 
 def about(request):
     return render(request, 'csapp/about.html')

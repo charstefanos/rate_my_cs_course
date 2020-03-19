@@ -6,9 +6,15 @@
 {% endblock %}
 
 {% block body_block %}
-	This is the Postgraduate page!
-	{% if user.is_authenticated %}
-		Hi {{ user.username}}!
+	<h2> Postgraduate Courses </h2>
+	
+	{% if courses %}
+		<ul>
+		{% for key,value in courses.items %}
+			<li> <a href= {{ value.1 }} >{{ key }}</a>
+		{% endfor %}
+		</ul>
+		
 	{% endif %}
 
 {% endblock %}

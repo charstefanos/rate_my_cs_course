@@ -6,9 +6,46 @@
 {% endblock %}
 
 {% block body_block %}
-	This is the Undergraduate page!
-	{% if user.is_authenticated %}
-		Hi {{ user.username}}!
+	<h2> Undergraduate Courses </h2>
+	
+	
+	{% if courses %}
+		<h3> Year 1 </h3>
+		<ul>
+		{% for key,value in courses.items %}
+			{% if value.0 == 1 %}
+				<li> <a href= {{ value.1 }} >{{ key }}</a>
+			{% endif %}
+		{% endfor %}
+		</ul>
+		
+		<h3> Year 2 </h3>
+		<ul>
+		{% for key,value in courses.items %}
+			{% if value.0 == 2 %}
+				<li> <a href= {{ value.1 }} >{{ key }}</a>
+			{% endif %}
+		{% endfor %}
+		</ul>
+		
+		<h3> Year 3 </h3>
+		<ul>
+		{% for key,value in courses.items %}
+			{% if value.0 == 3 %}
+				<li> <a href= {{ value.1 }} >{{ key }}</a>
+			{% endif %}
+		{% endfor %}
+		</ul>
+		
+		<h3> Year 4 </h3>
+		<ul>
+		{% for key,value in courses.items %}
+			{% if value.0 == 4 %}
+				<li> <a href= {{ value.1 }} >{{ key }}</a>
+			{% endif %}
+		{% endfor %}
+		</ul>
+		
 	{% endif %}
 
 {% endblock %}
