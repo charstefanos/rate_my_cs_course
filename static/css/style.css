@@ -9,6 +9,14 @@ html {
     position:relative;
     min-height: 100%;
 }
+::-webkit-scrollbar{
+	width: 12px;
+	background-color: #f9f9f9;
+}
+::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	background-color: #8e8e8e;
+}
 body{
     margin-bottom: 60px;
 }
@@ -168,6 +176,8 @@ footer{
 .display-4{
     font-size: 200%;
 }
+
+
 
 
 
