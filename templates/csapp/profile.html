@@ -11,65 +11,67 @@
 {% endblock %}
 
 {% block body_block %}
-	<h2>Profile</h2>
-	<img src={{user.userprofile.picture.url}}>
-	<div>
-	
-		{% if messages %}
-			{% for message in messages %}
-				{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-					{{ message }}
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-	
-		<form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" enctype="multipart/form-data">
-			
-			{% csrf_token %}
-			
-			{{ user_form.as_p }}
-			
-			<p> {{ profile_form.first_name.errors }} 
-			{{ profile_form.first_name.label}}
-			{{ profile_form.first_name }} </p>
-			
-			<p> {{ profile_form.last_name.errors }}
-			{{ profile_form.last_name.label}}
-			{{ profile_form.last_name }} </p>
-			
-			<p> {{ profile_form.email.errors }}
-			{{ profile_form.email.label}}
-			{{ profile_form.email }} </p>
-			
-			<p> {{ profile_form.picture.errors }}
-			{{ profile_form.picture.label }}
-			{{ profile_form.picture }} </p>
-			
-			<p> {{ profile_form.current_student.errors }}
-			{{ profile_form.current_student.label }}
-			{{ profile_form.current_student }} </p>
-				
-			<div id="current_student_fields">
-			
-				<p> {{ profile_form.year_of_studies.errors }}
-				{{ profile_form.year_of_studies.label }}
-				{{ profile_form.year_of_studies }} </p>
-				
-				<p> {{ profile_form.courses.errors }}
-				{{ profile_form.courses.label }}
-				{{ profile_form.courses }} </p>
-				
-				<p> {{ profile_form.contact.errors }}
-				{{ profile_form.contact.label }}
-				{{ profile_form.contact }} </p>
-			</div>
-			
-			<button type="submit">Update</button>
-		</form>
+	<div class="account">
+		<div class="account-img-info">
+			<img class="rounded-circle account-img" src={{user.userprofile.picture.url}}>
+				<p> {{ profile_form.picture.errors }}
+					{{ profile_form.picture.label }}
+					{{ profile_form.picture }} </p>
+		</div>		
+		<div class="account-info">
+			{% if messages %}
+				{% for message in messages %}
+					{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+						{{ message }}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
 		
-		<form id="user_delete_form" method="post" action="{% url 'csapp:delete_profile' %}">
-			{% csrf_token %}
-			<input type="submit" value="Delete Profile">
-		</form>	
-	</div>
+			<form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" enctype="multipart/form-data">
+				
+				{% csrf_token %}
+				
+				{{ user_form.as_p }}
+				
+				<p> {{ profile_form.first_name.errors }} 
+				{{ profile_form.first_name.label}}
+				{{ profile_form.first_name }} </p>
+				
+				<p> {{ profile_form.last_name.errors }}
+				{{ profile_form.last_name.label}}
+				{{ profile_form.last_name }} </p>
+				
+				<p> {{ profile_form.email.errors }}
+				{{ profile_form.email.label}}
+				{{ profile_form.email }} </p>
+				
+				
+				<p> {{ profile_form.current_student.errors }}
+				{{ profile_form.current_student.label }}
+				{{ profile_form.current_student }} </p>
+					
+				<div id="current_student_fields">
+				
+					<p> {{ profile_form.year_of_studies.errors }}
+					{{ profile_form.year_of_studies.label }}
+					{{ profile_form.year_of_studies }} </p>
+					
+					<p> {{ profile_form.courses.errors }}
+					{{ profile_form.courses.label }}
+					{{ profile_form.courses }} </p>
+					
+					<p> {{ profile_form.contact.errors }}
+					{{ profile_form.contact.label }}
+					{{ profile_form.contact }} </p>
+				</div>
+				
+				<button type="submit">Update</button>
+			</form>
+			
+			<form id="user_delete_form" method="post" action="{% url 'csapp:delete_profile' %}">
+				{% csrf_token %}
+				<input type="submit" value="Delete Profile">
+			</form>	
+		</div>
+	</div>	
 {% endblock %}
