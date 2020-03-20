@@ -48,6 +48,9 @@
 				
         {% else %}
                 <div class="about"><strong>There are no reviews yet.</strong></div>
-        {% endif %}
-            </div>
+		{% endif %}
+			</div>
+			{% if user.is_authenticated %}
+			<button type="write_review" class="btn btn-primary">Leave a Review</button>
+		   {% endif %}
 {% endblock %}

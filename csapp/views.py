@@ -272,6 +272,31 @@ def search(request):
     
     
     
+@login_required
+def write_review(request, course_name_slug):
+    context_dict = {}
+    form = ReviewForm()
+    if request.method == 'POST':
+        form = ReviewForm(data=request.POST)
+        course = Course.objects.get(slug=course_name_slug)
+        user = UserProfile.objects.get(user=request.user)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.course = course
+            review.overall_rating = int((review.lecturer_rating + review.informative + review.engagement) / 3)
+            review.student = user
+            review.save()
+            return redirect('/csapp/profile/my_reviews')
+        else:
+            print(form.errors)
+    context_dict['form'] = form
+    return render(request, 'csapp/write_review.html', context_dict)
 
+@login_required
+def my_reviews(request):
+    student = UserProfile.objects,get(user=request.user)
+    reviews_list = CourseRating.objects.filter(user=user)
+
+    return render(request, 'csapp/my_reviews.html', {'reviews_list': reviews_list})
     
 

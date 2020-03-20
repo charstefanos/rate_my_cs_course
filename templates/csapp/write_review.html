@@ -1,0 +1,23 @@
+{% extends 'csapp/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Write a review
+{% endblock %}
+
+{% block body_block %}
+    <h2>Write a review for {{course.name}}</h2>
+    <form id="user_form" method="post">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+            <div class="radio_list">
+                <strong>{{ field.label }}</strong>
+            </div>
+        <span> {{ field }}
+            {{ field.errors }}
+        </span>
+        <br>
+        {% endfor %}
+        <button type="write_review" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

@@ -20,5 +20,8 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/delete', views.delete_profile, name='delete_profile'),
     path('search/', views.search, name='search'),
+    path('postgraduate/<slug:course_name_slug>/write_review', views.write_review, name='write_review'),
+    path('undergraduate/<slug:course_name_slug>/write_review', views.write_review, name='write_review'),
+    path('profile/my_reviews', views.my_reviews, name='my_reviews'),
 ]
     

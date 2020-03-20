@@ -71,7 +71,6 @@ class ReviewForm(forms.ModelForm):
     lecturer_rating = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     engagement = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     informative = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    waiting_time = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
     comment = forms.CharField(required=False)
 
     class Meta:
