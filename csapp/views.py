@@ -31,7 +31,22 @@ def undergraduate(request):
         
     return render(request, 'csapp/undergraduate.html', {'courses': coursesDict})
 
-def undergraduate_course(request, course_name_slug):
+def postgraduate(request):
+    coursesDict = {}
+    courses = Course.objects.all()
+
+    for course in courses:
+        if course.year_in_university == 5:
+            name = course.name
+            year = course.year_in_university
+            courseSlug = course.slug
+            
+            courseList = [year,courseSlug]
+            coursesDict[name] = courseList
+
+    return render(request, 'csapp/postgraduate.html', {'courses': coursesDict})
+
+def course(request, course_name_slug):
     context_dict = {}
     try:
         course = Course.objects.get(slug=course_name_slug)
@@ -106,22 +121,6 @@ def undergraduate_course(request, course_name_slug):
     return render(request, 'csapp/course.html', {'courseInfo': context_dict})
 
 
-
-def postgraduate(request):
-    coursesDict = {}
-    courses = Course.objects.all()
-
-    for course in courses:
-        if course.year_in_university == 5:
-            name = course.name
-            year = course.year_in_university
-            courseSlug = course.slug
-            
-            courseList = [year,courseSlug]
-            coursesDict[name] = courseList
-
-    return render(request, 'csapp/postgraduate.html', {'courses': coursesDict})
-
 def about(request):
     return render(request, 'csapp/about.html')
 
@@ -191,26 +190,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('csapp:home'))
-
-#for the chosen course to be displayed   
-def postgraduate_course(request, course_name_slug):
-    context_dict = {}
-    try:
-        course = Course.objects.get(slug=course_name_slug)
-        context_dict['course'] = course
-        context_dict['description'] = course.description
-        #student = UserProfile.objects.get(user=request.user)
-        #context_dict['student'] = student
-        reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
-        if len(reviews) > 0:
-            context_dict['lecturer_rating'] = lecturer_rating
-            context_dict['engagement'] = engagement
-            context_dict['informative'] = informative
-            context_dict['comment'] = comment
-    except Course.DoesNotExist:
-        raise Http404("Course does not exist") 
-    return render(request, 'csapp/course.html', context=context_dict)
-    
+     
 @login_required    
 def profile(request):
     if request.method == 'POST':
