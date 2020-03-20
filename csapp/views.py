@@ -50,6 +50,9 @@ def course(request, course_name_slug):
     context_dict = {}
     try:
         course = Course.objects.get(slug=course_name_slug)
+
+        course.views = course.views + 1
+        course.save(update_fields=["views"]) 
     
         name = course.name
         description = course.description
