@@ -79,10 +79,16 @@ def undergraduate_course(request, course_name_slug):
             reviewsDict[index] = reviewDict
             index = index + 1
 
-        averageOverallRating = sumOverallRating // index
-        averageLecturerRating = sumLecturerRating // index
-        averageEngagementRating = sumEngagementRating // index
-        averageInformativeRating = sumInformativeRating // index
+        if index == 0:
+            averageOverallRating = 0
+            averageLecturerRating = 0
+            averageEngagementRating = 0
+            averageInformativeRating = 0
+        else:
+            averageOverallRating = sumOverallRating // index
+            averageLecturerRating = sumLecturerRating // index
+            averageEngagementRating = sumEngagementRating // index
+            averageInformativeRating = sumInformativeRating // index
 
         context_dict["name"] = name
         context_dict["description"] = description
