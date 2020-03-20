@@ -76,12 +76,12 @@
 								{{ profile_form.contact }} </p>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-primary btn-block">Update</button>
+						<button type="submit" class="btn btn-primary btn-sm btn-block">Update</button>
 					</form>
 					
 					<form id="user_delete_form" method="post" action="{% url 'csapp:delete_profile' %}">
 						{% csrf_token %}
-						<button type="submit" class="btn btn-danger btn-block">Delete Profile</button>
+						<button type="submit" class="btn btn-danger btn-sm btn-block">Delete Profile</button>
 					</form>	
 				</div>
 			</div>

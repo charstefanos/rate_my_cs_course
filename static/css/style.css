@@ -28,7 +28,7 @@ body{
     padding-right: 20px;
 }
 .nav-link{
-    font-size: 1.1 em !important;
+    font-size: 1.1em !important;
 }
 .carousel-inner img{
     width: 100%;
@@ -94,13 +94,8 @@ footer{
     height: 60px;
     text-align: center;
 }
-.btn-block{
-    display: block;
-    width: 150px;
-}
 .account{
     width: 1300px;
-    height: 100%;
     margin: auto;
 }
 .account-img{
@@ -115,7 +110,12 @@ footer{
     height: 350px;
     float: right;
     padding-top: 100px;
-
+}
+.btn-sm{
+    display: block;
+    width: 150px;
+    padding:10px;
+    font-size: 1.1em !important;
 }
 .account-info{
     display: block;
