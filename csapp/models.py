@@ -35,7 +35,7 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include.
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.EmailField(max_length=30)
+    email = models.EmailField(max_length=30, unique=True)
     picture = models.ImageField(default='default.jpg', upload_to='profile_images')
     current_student = models.BooleanField(default = False)
     
@@ -77,8 +77,9 @@ class CourseRating(models.Model):
     engagement = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     informative = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     comment = models.CharField(max_length = 250, blank = True)
+    
     def __str__(self):
-        return self.overall_rating
+        return str(self.overall_rating)
 
     class Meta:
         verbose_name = 'Course Rating'

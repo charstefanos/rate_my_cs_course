@@ -31,6 +31,76 @@ def undergraduate(request):
         
     return render(request, 'csapp/undergraduate.html', {'courses': coursesDict})
 
+def undergraduate_course(request, course_name_slug):
+    context_dict = {}
+    try:
+        course = Course.objects.get(slug=course_name_slug)
+    
+        name = course.name
+        description = course.description
+        year = course.year_in_university
+        
+        reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
+        reviewsDict = {}
+
+        index = 0
+
+        sumOverallRating = 0 
+        sumLecturerRating = 0 
+        sumEngagementRating = 0 
+        sumInformativeRating = 0
+        
+        for review in reviews:
+            reviewDict = {}
+
+            student = review.student
+            
+            overallRating = review.overall_rating
+            sumOverallRating =  sumOverallRating + overallRating
+            
+            lecturerRating = review.lecturer_rating
+            sumLecturerRating = sumLecturerRating + lecturerRating
+
+            engagementRating = review.engagement
+            sumEngagementRating = sumEngagementRating + engagementRating
+            
+            informativeRating = review.informative
+            sumInformativeRating = sumInformativeRating + informativeRating
+
+            comment = review.comment
+
+            reviewDict["student"] = student
+            reviewDict["overallRating"] = overallRating
+            reviewDict["lecturerRating"] = lecturerRating
+            reviewDict["engagementRating"] = engagementRating
+            reviewDict["informativeRating"] = informativeRating
+            reviewDict["comment"] = comment
+
+            reviewsDict[index] = reviewDict
+            index = index + 1
+
+        averageOverallRating = sumOverallRating // index
+        averageLecturerRating = sumLecturerRating // index
+        averageEngagementRating = sumEngagementRating // index
+        averageInformativeRating = sumInformativeRating // index
+
+        context_dict["name"] = name
+        context_dict["description"] = description
+        context_dict["year"] = year
+        context_dict["averageOverallRating"] = averageOverallRating
+        context_dict["averageLecturerRating"] = averageLecturerRating
+        context_dict["averageEngagementRating"] = averageEngagementRating
+        context_dict["averageInformativeRating"] = averageInformativeRating
+        context_dict["reviews"] = reviewsDict
+        
+        
+    except Course.DoesNotExist:
+        raise Http404("Course does not exist")
+    
+    return render(request, 'csapp/course.html', {'courseInfo': context_dict})
+
+
+
 def postgraduate(request):
     coursesDict = {}
     courses = Course.objects.all()
@@ -134,34 +204,6 @@ def postgraduate_course(request, course_name_slug):
     except Course.DoesNotExist:
         raise Http404("Course does not exist") 
     return render(request, 'csapp/course.html', context=context_dict)
-    
-#for the chosen course to be displayed  
-#@Stefanos: I removed the year parameter as it wasnt running but i will try and figure it
-# out later   
-def undergraduate_course(request, course_name_slug):
-    context_dict = {}
-    try:
-        course = Course.objects.get(slug=course_name_slug)
-        #check if course has right corresponding year in URL
-        if False:
-            raise Http404("Wrong year")
-        else:
-            #student = User.objects.get(username=request.user)
-            #context_dict['student'] = student
-            context_dict['course'] = course
-            context_dict['description'] = course.description
-            reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
-            #context_dict['year'] = year
-            if len(reviews) > 0:
-                context_dict['lecturer_rating'] = lecturer_rating
-                context_dict['engagement'] = engagement
-                context_dict['informative'] = informative
-                context_dict['comment'] = comment  
-    except Course.DoesNotExist:
-        context_dict['errors'] = 'This course does not exist'
-        raise Http404("Course does not exist") 
-    return render(request, 'csapp/course.html', context=context_dict)
-    
     
 @login_required    
 def profile(request):
