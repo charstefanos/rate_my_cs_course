@@ -57,6 +57,7 @@ def course(request, course_name_slug):
         name = course.name
         description = course.description
         year = course.year_in_university
+        slug = course.slug
         
         reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
         reviewsDict = {}
@@ -111,6 +112,7 @@ def course(request, course_name_slug):
         context_dict["name"] = name
         context_dict["description"] = description
         context_dict["year"] = year
+        context_dict["slug"] = slug
         context_dict["averageOverallRating"] = averageOverallRating
         context_dict["averageLecturerRating"] = averageLecturerRating
         context_dict["averageEngagementRating"] = averageEngagementRating
