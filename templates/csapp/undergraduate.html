@@ -2,50 +2,99 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	Undergraduate Page
+Undergraduate Page
 {% endblock %}
 
 {% block body_block %}
-	<h2> Undergraduate Courses </h2>
-	
-	
-	{% if courses %}
-		<h3> Year 1 </h3>
-		<ul>
-		{% for key,value in courses.items %}
-			{% if value.0 == 1 %}
-				<li> <a href= {{ value.1 }} >{{ key }}</a>
-			{% endif %}
-		{% endfor %}
-		</ul>
-		
-		<h3> Year 2 </h3>
-		<ul>
-		{% for key,value in courses.items %}
-			{% if value.0 == 2 %}
-				<li> <a href= {{ value.1 }} >{{ key }}</a>
-			{% endif %}
-		{% endfor %}
-		</ul>
-		
-		<h3> Year 3 </h3>
-		<ul>
-		{% for key,value in courses.items %}
-			{% if value.0 == 3 %}
-				<li> <a href= {{ value.1 }} >{{ key }}</a>
-			{% endif %}
-		{% endfor %}
-		</ul>
-		
-		<h3> Year 4 </h3>
-		<ul>
-		{% for key,value in courses.items %}
-			{% if value.0 == 4 %}
-				<li> <a href= {{ value.1 }} >{{ key }}</a>
-			{% endif %}
-		{% endfor %}
-		</ul>
-		
-	{% endif %}
-
-{% endblock %}
+<div class="main">
+<h2 class="text-center my-4"> Undergraduate Courses </h2>
+{% if courses %}
+<div class="accordion" id="accordionUndergraduate">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Undergraduate Courses - Year 1
+                </button>
+            </h2>
+        </div>
+        
+        <div id="collapseOne" class="collapse show px-5" aria-labelledby="headingOne" data-parent="#accordionUndergraduate">
+            <div class="card-body">
+                <ul>
+                    {% for key,value in courses.items %}
+                    {% if value.0 == 1 %}
+                    <li> <a href= {{ value.1 }} >{{ key }}</a>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-primary btn-lg btn-block collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Undergraduate Courses - Year 2
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse px-5" aria-labelledby="headingTwo" data-parent="#accordionUndergraduate">
+                <div class="card-body">
+                    <ul>
+                        {% for key,value in courses.items %}
+                        {% if value.0 == 2 %}
+                        <li> <a href= {{ value.1 }} >{{ key }}</a>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-primary btn-lg btn-block collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Undergraduate Courses - Year 3
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse px-5" aria-labelledby="headingThree" data-parent="#accordionUndergraduate">
+                    <div class="card-body">
+                        <ul>
+                            {% for key,value in courses.items %}
+                            {% if value.0 == 3 %}
+                            <li> <a href= {{ value.1 }} >{{ key }}</a>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-primary btn-lg btn-block collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Undergraduate Courses - Year 4
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFour" class="collapse px-5" aria-labelledby="headingFour" data-parent="#accordionUndergraduate">
+                        <div class="card-body">
+                            <ul>
+                                {% for key,value in courses.items %}
+                                {% if value.0 == 4 %}
+                                <li> <a href= {{ value.1 }} >{{ key }}</a>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>	
+                
+                {% endif %}
+            </div>
+                
+                {% endblock %}
+                        

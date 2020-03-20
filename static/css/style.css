@@ -35,7 +35,7 @@ body{
     height: 100%;
 }
 .carousel-caption{
-    positon: absolute;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -57,6 +57,14 @@ body{
 .btn-primary:hover{
     background-color: #4A2040;
     border: 1px solid #4A2040;
+}
+.btn-primary:focus {
+  background-color: #4A2040 !important;
+  outline: 0 !important;
+  outline-offset: 0  !important;
+  background-image: none  !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
 }
 .padding{
     padding-bottom: 2rem;
@@ -115,7 +123,7 @@ footer{
     
 }
 .container-form{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -135,7 +143,9 @@ footer{
     text-decoration: none;
     font-weight: bold;
 }
-
+.main h2{
+    color: #8e8e8e;
+}
 .navbar input[type=text] {
   border:solid #b4b4b4; 
   margin-top: 8px;
@@ -162,6 +172,19 @@ footer{
     color: black !important;
     border-color: #e6e6e6 !important;
 }
+.postgrad-container {
+    background-color: #f9f9f9;
+    border-radius: 30px;
+    border-top: 2px solid #800080;
+    border-bottom: 2px solid #800080;
+   -webkit-column-count: 2;
+      -moz-column-count: 2;
+           column-count: 2;
+
+   -webkit-column-gap: 20px;
+      -moz-column-gap: 20px;
+           column-gap: 20px;
+}
 
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
@@ -181,6 +204,13 @@ footer{
 .display-4{
     font-size: 200%;
 }
+.postgrad-container {
+   -webkit-column-count: 1;
+      -moz-column-count: 1;
+           column-count: 1;
+}
+    
+
 
 
 
