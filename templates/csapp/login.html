@@ -18,8 +18,8 @@ Login
 	{% endfor %}
 {% endif %}
 
-<div class="container-form">
-    <h3>Login</h3>
+<div class="main container-form">
+    <h2 class="text-center my-4">Login</h2>
     <form class="form-signin" id="login_form" role="form" method="post" action="{% url 'csapp:login' %}">
         {% csrf_token %}
         <label for="inputUsername" class="sr-only">Username</label>

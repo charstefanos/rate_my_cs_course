@@ -11,59 +11,71 @@ Register
 {% endblock %}
 
 {% block body_block %}
-
-<h2>Register</h2>
-{% if registered %}
-<strong>You have successfully registered!</strong>
-<br/>
-{% else %}
-<div class="container-form">
-    <form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}"
-    enctype="multipart/form-data">
-	
-		
-        {% csrf_token %}
-        
-        {{ user_form.as_p }}
-        
-        <p> {{ profile_form.first_name.errors }} 
-			{{ profile_form.first_name.label}}
-        {{ profile_form.first_name }} </p>
-        
-        <p> {{ profile_form.last_name.errors }}
-			{{ profile_form.last_name.label}}
-        {{ profile_form.last_name }} </p>
-        
-        <p> {{ profile_form.email.errors }}
-			{{ profile_form.email.label}}
-        {{ profile_form.email }} </p>
-        
-        <p> {{ profile_form.picture.errors }}
-			{{ profile_form.picture.label }}
-        {{ profile_form.picture }} </p>
-        
-        <p> {{ profile_form.current_student.errors }}
-			{{ profile_form.current_student.label }}
-        {{ profile_form.current_student }} </p>
-        
-        <div id="current_student_fields" hidden>
-			
-            <p> {{ profile_form.year_of_studies.errors }}
-				{{ profile_form.year_of_studies.label }}
-            {{ profile_form.year_of_studies }} </p>
-            
-            <p> {{ profile_form.courses.errors }}
-				{{ profile_form.courses.label }}
-            {{ profile_form.courses }} </p>
-            
-            <p> {{ profile_form.contact.errors }}
-				{{ profile_form.contact.label }}
-            {{ profile_form.contact }} </p>
-			
+<div class="main">
+    <h2 class="text-center my-4">Register</h2>
+    {% if registered %}
+    <p class="text-center">
+        You have successfully registered!
+        <a href="{% url 'csapp:login' %}">Log In Now!</a>
+    </p>
+    <br/>
+    {% else %}
+    <div class="container">
+        <div class="row">
+            <div class="form-group" >
+                <form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <p class="required">
+                            {{ user_form.username.errors }}
+                            <input class="form-control" id="id_username" maxlength="30" name="username" type="text" placeholder="Username"/>
+                            <span class="text-muted helptext">
+                                Required. 30 characters or fewer.
+                                Letters, digits and @/./+/-/_ only.
+                            </span>
+                        </p>
+                        <p class="required">
+                            {{ user_form.password.errors }}
+                            <input class="form-control" id="id_password" name="password" type="password" placeholder="Password" />
+                        </p>
+                        <p class="required">
+                            {{ profile_form.first_name.errors }}
+                            <input class="form-control" id="first_name" name="first_name" type="text" placeholder="First Name"/>
+                        </p>
+                        <p class="required">
+                            {{ profile_form.last_name.errors }}
+                            <input class="form-control" id="last_name" name="last_name" type="text" placeholder="Last Name"/>
+                        </p>
+                        <p class="required">
+                            {{ profile_form.email.errors }}
+                            <input class="form-control" id="id_email" name="email" type="email" placeholder="E-mail" />
+                        </p>
+                        
+                        <p> {{ profile_form.current_student.errors }}
+                            {{ profile_form.current_student.label }}
+                        {{ profile_form.current_student }} </p>
+                        
+                        <div id="current_student_fields" hidden>
+                            
+                            <p> {{ profile_form.year_of_studies.errors }}
+                                {{ profile_form.year_of_studies.label }}
+                            {{ profile_form.year_of_studies }} </p>
+                            
+                            <p> {{ profile_form.courses.errors }}
+                                {{ profile_form.courses.label }}
+                            {{ profile_form.courses }} </p>
+                            
+                            <p> {{ profile_form.contact.errors }}
+                                {{ profile_form.contact.label }}
+                            {{ profile_form.contact }} </p>
+                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        
-        <input type="submit" name="submit" value="Submit" />
-    </form>
+    </div>
 </div>
 {% endif %}
 {% endblock %}
