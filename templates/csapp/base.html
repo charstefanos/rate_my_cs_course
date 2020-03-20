@@ -52,10 +52,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'csapp:about' %}">About us</a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'csapp:opendays' %}">Open days</a>
                         </li>
-                        {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'csapp:profile' %}">Profile</a>
                         </li>
