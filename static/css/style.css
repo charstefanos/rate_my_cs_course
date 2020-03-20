@@ -94,8 +94,12 @@ footer{
     height: 60px;
     text-align: center;
 }
+.btn-block{
+    display: block;
+    width: 150px;
+}
 .account{
-    width: 45%;
+    width: 1300px;
     height: 100%;
     margin: auto;
 }
@@ -107,7 +111,7 @@ footer{
 }
 .account-img-info{
     display: block;
-    width: 400px;
+    width: 350px;
     height: 350px;
     float: right;
     padding-top: 100px;
@@ -115,7 +119,7 @@ footer{
 }
 .account-info{
     display: block;
-    width: 400px;
+    width: 750px;
     height: 600px;
     padding-top: 100px;
     padding-right: 150px;
