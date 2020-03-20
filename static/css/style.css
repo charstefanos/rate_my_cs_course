@@ -95,8 +95,10 @@ footer{
     text-align: center;
 }
 .account{
-    width: 1300px;
-    margin: auto;
+    overflow: auto;
+    width: 100%;
+    padding-right: 15%;
+    padding-bottom: 250px;
 }
 .account-img{
     height: 200px;
