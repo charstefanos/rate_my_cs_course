@@ -294,8 +294,8 @@ def write_review(request, course_name_slug):
 
 @login_required
 def my_reviews(request):
-    student = UserProfile.objects,get(user=request.user)
-    reviews_list = CourseRating.objects.filter(user=user)
+    student = UserProfile.objects.get(user=request.user)
+    reviews_list = CourseRating.objects.filter(user=student)
 
     return render(request, 'csapp/my_reviews.html', {'reviews_list': reviews_list})
     
