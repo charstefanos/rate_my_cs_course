@@ -51,6 +51,10 @@
 		{% endif %}
 			</div>
 			{% if user.is_authenticated %}
-			<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button>
+				{% if courseInfo.name in courseInfo.coursesTakenByUser %}
+					<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button>
+				{% else %}
+					<strong>You can't leave a review for this course</strong></div>
+				{% endif %}
 		   {% endif %}
 {% endblock %}

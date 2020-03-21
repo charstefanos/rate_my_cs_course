@@ -49,6 +49,16 @@ def postgraduate(request):
 def course(request, course_name_slug):
     context_dict = {}
     try:
+        if request.user.is_anonymous:
+            coursesTakenByUser = None
+        else:
+            coursesTakenByUserList = []
+            user = request.user
+            coursesTakenByUser = user.userprofile.courses.all()
+        
+            for course in coursesTakenByUser:
+                coursesTakenByUserList.append(course.name)
+        
         course = Course.objects.get(slug=course_name_slug)
 
         course.views = course.views + 1
@@ -113,6 +123,7 @@ def course(request, course_name_slug):
         context_dict["description"] = description
         context_dict["year"] = year
         context_dict["slug"] = slug
+        context_dict["coursesTakenByUser"] = coursesTakenByUserList
         context_dict["averageOverallRating"] = averageOverallRating
         context_dict["averageLecturerRating"] = averageLecturerRating
         context_dict["averageEngagementRating"] = averageEngagementRating
