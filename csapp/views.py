@@ -50,7 +50,7 @@ def course(request, course_name_slug):
     context_dict = {}
     try:
         if request.user.is_anonymous:
-            coursesTakenByUser = None
+            coursesTakenByUserList = None
         else:
             coursesTakenByUserList = []
             user = request.user
