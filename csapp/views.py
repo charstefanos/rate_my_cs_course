@@ -49,18 +49,21 @@ def postgraduate(request):
 def course(request, course_name_slug):
     context_dict = {}
     try:
+        # Anonymous users/Non users have no courses
         if request.user.is_anonymous:
             coursesTakenByUserList = None
         else:
+            # Find the courses of the user
             coursesTakenByUserList = []
             user = request.user
             coursesTakenByUser = user.userprofile.courses.all()
         
             for course in coursesTakenByUser:
                 coursesTakenByUserList.append(course.name)
-        
-        course = Course.objects.get(slug=course_name_slug)
 
+        # Find details of the course
+        # and increment its views
+        course = Course.objects.get(slug=course_name_slug)
         course.views = course.views + 1
         course.save(update_fields=["views"]) 
     
@@ -68,7 +71,30 @@ def course(request, course_name_slug):
         description = course.description
         year = course.year_in_university
         slug = course.slug
+
+        # Find all the users who have also this course
+        # and have chosen to be contacted
+        contactDict = {}
+        users = UserProfile.objects.all()
         
+        for user in users:
+            if (user.current_student) and (user != request.user.userprofile):
+                coursesTakenByUser = user.courses.all()
+
+                coursesTakenByUserList = []
+                for course in coursesTakenByUser:
+                    coursesTakenByUserList.append(course.name)
+
+                # Allow only up to 5 student to be showcased
+                # in the need help box
+                index = 0
+                if (name in coursesTakenByUserList) and (user.contact) and (index < 5):
+                    contactDict[user] = user.email
+                    index = index + 1
+                
+
+        # Find all reviews for this course
+        # and compute the various ratings
         reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
         reviewsDict = {}
 
@@ -108,6 +134,7 @@ def course(request, course_name_slug):
             reviewsDict[index] = reviewDict
             index = index + 1
 
+        # Avoid division by 0 error
         if index == 0:
             averageOverallRating = 0
             averageLecturerRating = 0
@@ -119,11 +146,13 @@ def course(request, course_name_slug):
             averageEngagementRating = sumEngagementRating // index
             averageInformativeRating = sumInformativeRating // index
 
+        # Dictionary that will be passed to the template
         context_dict["name"] = name
         context_dict["description"] = description
         context_dict["year"] = year
         context_dict["slug"] = slug
         context_dict["coursesTakenByUser"] = coursesTakenByUserList
+        context_dict["contactUsers"] = contactDict
         context_dict["averageOverallRating"] = averageOverallRating
         context_dict["averageLecturerRating"] = averageLecturerRating
         context_dict["averageEngagementRating"] = averageEngagementRating

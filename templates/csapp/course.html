@@ -49,12 +49,27 @@
         {% else %}
                 <div class="about"><strong>There are no reviews yet.</strong></div>
 		{% endif %}
-			</div>
 			{% if user.is_authenticated %}
 				{% if courseInfo.name in courseInfo.coursesTakenByUser %}
-					<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button>
+					<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
+					<br>
 				{% else %}
-					<strong>You can't leave a review for this course</strong></div>
+					<strong>You can't leave a review for this course</strong>
+					<br>
+				{% endif %}
+				
+				<br>
+				<h3> Need help? </h3>
+				{% if courseInfo.contactUsers %}
+					<p> Try contacting these students! </p>
+					<ul>
+					{% for contactName,contactEmail in courseInfo.contactUsers.items %}
+						<li> {{ contactName }} : {{ contactEmail }} </li>
+					{% endfor %}
+					</ul>
+				{% else %}
+					<p> Try contacting the university directly </p>
+					<p> University Email Placeholder </p>
 				{% endif %}
 		   {% endif %}
 {% endblock %}
