@@ -20,6 +20,8 @@ def undergraduate(request):
     coursesDict = {}
     courses = Course.objects.all()
 
+    # Finds all the undergraduate courses
+    # along with their information
     for course in courses:
         if course.year_in_university <= 4:
             name = course.name
@@ -35,6 +37,8 @@ def postgraduate(request):
     coursesDict = {}
     courses = Course.objects.all()
 
+    # Finds all the postgraduate courses
+    # along with their information
     for course in courses:
         if course.year_in_university == 5:
             name = course.name
@@ -77,22 +81,22 @@ def course(request, course_name_slug):
         contactDict = {}
         users = UserProfile.objects.all()
         
-        for user in users:
-            if (user.current_student) and (user != request.user.userprofile):
-                coursesTakenByUser = user.courses.all()
+        if request.user.is_anonymous == False:
+            for user in users:
+                if (user.current_student) and (user != request.user.userprofile):
+                    coursesTakenByUser = user.courses.all()
 
-                coursesTakenByUserList = []
-                for course in coursesTakenByUser:
-                    coursesTakenByUserList.append(course.name)
+                    coursesTakenByUserList = []
+                    for course in coursesTakenByUser:
+                        coursesTakenByUserList.append(course.name)
 
-                # Allow only up to 5 student to be showcased
-                # in the need help box
-                index = 0
-                if (name in coursesTakenByUserList) and (user.contact) and (index < 5):
-                    contactDict[user] = user.email
-                    index = index + 1
+                    # Allow only up to 5 students to be showcased
+                    # in the need help box
+                    index = 0
+                    if (name in coursesTakenByUserList) and (user.contact) and (index < 5):
+                        contactDict[user] = user.email
+                        index = index + 1
                 
-
         # Find all reviews for this course
         # and compute the various ratings
         reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
@@ -207,6 +211,14 @@ def register(request):
                              'registered': registered})
 
 def load_courses(request):
+    # When the year of studies changes in the register page
+    # the jQuery code is triggered, csapp-filterCourses,
+    # which then calls this view
+    # This view then gets the year of studies
+    # filters the courses based on that year of study
+    # and passes the courses to a template
+    # If successful, the jQuery will take those courses passed to the template
+    # and add them to the courses drop-down list
     year_of_studies = request.GET.get('year_of_studies')
     courses = Course.objects.filter(year_in_university__lte = year_of_studies).order_by('-year_in_university')
     return render(request, 'csapp/courses_dropdown_list.html', {'courses': courses})
@@ -274,6 +286,14 @@ def delete_profile(request):
     return render(request, 'csapp/profile.html', context_dict)
 
 def search(request):
+    # Creates a list of dictionaries
+    # Each dictionary includes the name of a course, label
+    # and its url, value
+
+    # The list is then returned as a Json Response to a template,
+    # which is then used by the jQuery code, csapp-searchBarAutocomplete,
+    # to populate the search bar and link each course to its proper page
+    # when its name is clicked
     courses = Course.objects.all()
 
     coursesList = []
@@ -294,8 +314,6 @@ def search(request):
         coursesList.append(courseDictionary)
 
     return JsonResponse(coursesList, safe=False)
-    
-    
     
 @login_required
 def write_review(request, course_name_slug):
