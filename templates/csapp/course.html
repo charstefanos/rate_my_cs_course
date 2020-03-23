@@ -30,7 +30,7 @@
 		<p>Average Informative Rating: {{ courseInfo.averageInformativeRating }} </p>
 		</div>
 	
-    <h3>Reviews</h3>
+    <h3>Latest Reviews</h3>
         {% if courseInfo.reviews %}
 			{% for courseIndex,dict in courseInfo.reviews.items %}
 				{% if courseIndex <= 5 %}
@@ -49,15 +49,15 @@
         {% else %}
                 <div class="about"><strong>There are no reviews yet.</strong></div>
 		{% endif %}
-			{% if user.is_authenticated %}
-				{% if courseInfo.name in courseInfo.coursesTakenByUser %}
-					<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
-					<br>
-				{% else %}
-					<strong>You can't leave a review for this course</strong>
-					<br>
-				{% endif %}
-				
+		
+		{% if user.is_authenticated %}
+			{% if courseInfo.name in courseInfo.coursesTakenByUser %}
+				<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
+				<br>
+			{% else %}
+				<strong>You can't leave a review for this course</strong>
+				<br>
+			{% endif %}
 				<br>
 				<h3> Need help? </h3>
 				{% if courseInfo.contactUsers %}
@@ -71,5 +71,5 @@
 					<p> Try contacting the university directly </p>
 					<p> University Email Placeholder </p>
 				{% endif %}
-		   {% endif %}
+		{% endif %}
 {% endblock %}

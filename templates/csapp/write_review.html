@@ -6,18 +6,27 @@
 {% endblock %}
 
 {% block body_block %}
-    <h2>Write a review for {{course.name}}</h2>
-    <form id="user_form" method="post">
-        {% csrf_token %}
-        {% for field in form.visible_fields %}
-            <div class="radio_list">
-                <strong>{{ field.label }}</strong>
-            </div>
-        <span> {{ field }}
-            {{ field.errors }}
-        </span>
-        <br>
-        {% endfor %}
-        <button type="write_review" class="btn btn-primary">Submit</button>
-    </form>
+    <h2>Write a review for {{ reviewInfo.courseName }}</h2>
+	
+    {% if reviewInfo.reviewPosted %}
+		<p class="text-center">
+			You have successfully posted your review!
+		</p>
+		<br/>
+    {% else %}
+		<form id="user_form" method="post">
+			{% csrf_token %}
+			{% for field in reviewInfo.reviewForm.visible_fields %}
+				<div class="radio_list">
+					<strong>{{ field.label }}</strong>
+				</div>
+			<span> {{ field }}
+				{{ field.errors }}
+			</span>
+			<br>
+			{% endfor %}
+			<br>
+			<button type="write_review" class="btn btn-primary">Submit</button>
+		</form>
+	{% endif %}
 {% endblock %}

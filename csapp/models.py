@@ -64,8 +64,6 @@ class UserProfile(models.Model):
             img.thumbnail(output_size)
             img.save(self.picture.path)
             
-        
-    
 #Implemented rating as integers - to be conveted from the number of stars a user has chosen.
 class CourseRating(models.Model):
     #two foreign keys - for the student and the course (one-to-many relationships)
@@ -77,6 +75,7 @@ class CourseRating(models.Model):
     engagement = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     informative = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     comment = models.CharField(max_length = 250, blank = True)
+    dateTime = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return str(self.overall_rating)

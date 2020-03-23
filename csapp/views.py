@@ -76,30 +76,9 @@ def course(request, course_name_slug):
         year = course.year_in_university
         slug = course.slug
 
-        # Find all the users who have also this course
-        # and have chosen to be contacted
-        contactDict = {}
-        users = UserProfile.objects.all()
-        
-        if request.user.is_anonymous == False:
-            for user in users:
-                if (user.current_student) and (user != request.user.userprofile):
-                    coursesTakenByUser = user.courses.all()
-
-                    coursesTakenByUserList = []
-                    for course in coursesTakenByUser:
-                        coursesTakenByUserList.append(course.name)
-
-                    # Allow only up to 5 students to be showcased
-                    # in the need help box
-                    index = 0
-                    if (name in coursesTakenByUserList) and (user.contact) and (index < 5):
-                        contactDict[user] = user.email
-                        index = index + 1
-                
         # Find all reviews for this course
         # and compute the various ratings
-        reviews = CourseRating.objects.order_by('-overall_rating').filter(course=course)
+        reviews = CourseRating.objects.filter(course = course).order_by('dateTime')
         reviewsDict = {}
 
         index = 0
@@ -150,6 +129,27 @@ def course(request, course_name_slug):
             averageEngagementRating = sumEngagementRating // index
             averageInformativeRating = sumInformativeRating // index
 
+        # Find all the users who have also this course
+        # and have chosen to be contacted
+        contactDict = {}
+        users = UserProfile.objects.all()
+        
+        if request.user.is_anonymous == False:
+            for user in users:
+                if (user.current_student) and (user != request.user.userprofile) and (user.contact):
+                    coursesTakenByUser = user.courses.all()
+
+                    coursesTakenByContactUserList = []
+                    for course in coursesTakenByUser:
+                        coursesTakenByContactUserList.append(course.name)
+
+                    # Allow only up to 5 students to be showcased
+                    # in the need help box
+                    index = 0
+                    if (name in coursesTakenByContactUserList) and (index < 5):
+                        contactDict[user] = user.email
+                        index = index + 1
+
         # Dictionary that will be passed to the template
         context_dict["name"] = name
         context_dict["description"] = description
@@ -162,8 +162,7 @@ def course(request, course_name_slug):
         context_dict["averageEngagementRating"] = averageEngagementRating
         context_dict["averageInformativeRating"] = averageInformativeRating
         context_dict["reviews"] = reviewsDict
-        
-        
+
     except Course.DoesNotExist:
         raise Http404("Course does not exist")
     
@@ -318,27 +317,44 @@ def search(request):
 @login_required
 def write_review(request, course_name_slug):
     context_dict = {}
-    form = ReviewForm()
+    ReviewPosted = False
+    context_dict["reviewPosted"] = ReviewPosted
+    
+    course = Course.objects.get(slug=course_name_slug)
+    context_dict["courseName"] = course.name
+    
+    user = UserProfile.objects.get(user=request.user)
+
     if request.method == 'POST':
-        form = ReviewForm(data=request.POST)
-        course = Course.objects.get(slug=course_name_slug)
-        user = UserProfile.objects.get(user=request.user)
-        if form.is_valid():
-            review = form.save(commit=False)
+
+        try:
+            review = CourseRating.objects.get(course = course, student = request.user.userprofile)
+            review.delete()
+        except CourseRating.DoesNotExist:
+            pass
+        
+        review_form = ReviewForm(data=request.POST)
+        
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
             review.course = course
-            review.overall_rating = int((review.lecturer_rating + review.informative + review.engagement) / 3)
             review.student = user
             review.save()
-            return redirect('/csapp/profile/my_reviews')
+
+            ReviewPosted = True
+            context_dict["reviewPosted"] = ReviewPosted
         else:
-            print(form.errors)
-    context_dict['form'] = form
-    return render(request, 'csapp/write_review.html', context_dict)
+            print(review_form.errors)
+    else:
+        review_form = ReviewForm()
+        
+    context_dict["reviewForm"] = review_form   
+    return render(request, 'csapp/write_review.html', {'reviewInfo':context_dict})
 
 @login_required
 def my_reviews(request):
     student = UserProfile.objects.get(user=request.user)
-    reviews_list = CourseRating.objects.filter(user=student)
+    reviews_list = CourseRating.objects.filter(student=student)
 
     return render(request, 'csapp/my_reviews.html', {'reviews_list': reviews_list})
     

@@ -5,12 +5,11 @@ class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name', )}
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_dispaly = ('course', 'username', 'comment')
+    readonly_fields = ('dateTime',)
 
-admin.site.register(CourseRating)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(UserProfile)
-#admin.site.register(CourseRating, ReviewAdmin)
+admin.site.register(CourseRating, ReviewAdmin)
 
 
     
