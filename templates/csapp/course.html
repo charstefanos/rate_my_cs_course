@@ -1,75 +1,122 @@
 
 {% extends 'csapp/base.html' %}
 {% load staticfiles %}
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-    .checked {
-      color: orange;
-    }
-    </style>
-    </head>
-    <body>
-{% block title_block %}
-	{{ courseInfo.name }}
-{% endblock %}
 
-{% block body_block %}
-	
-    <h2 xmlns="http://www.w3.org/1999/html">{{ courseInfo.name }}</h2>
-        <div>
-            {% csrf_token %}
-			<p>Year: {{ courseInfo.year }}</p>
-            <p>Description: {{ courseInfo.description }}</p>
+    {% block title_block %}
+	{{ courseInfo.name }}
+    {% endblock %}
+    
+    {% block body_block %}
+    <div class="main">
+	<div class="jumbotron p-5 mx-5">
+    <h2>{{ courseInfo.name }}</h2>
+    <div>
+        {% csrf_token %}
+        <p>
+            <strong>Year:</strong>
+            {{ courseInfo.year }}
+        </p>
+        <p>
+        <strong>Description:</strong>
+        {{ courseInfo.description }}
+    </p>
+    </div>
+    
+    <div class="container">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Average Rating</th>
+                    <th scope="col">Average Rating in %</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Overall Rating</th>
+                    <td>
+                        <div class="star-ratings-sprite"><span style="width:{{ courseInfo.averageOverallRating }}%" class="star-ratings-sprite-rating"></span></div>
+                    </td>
+                    <td>{{ courseInfo.averageOverallRating }}%</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lecturer Rating</th>
+                    <td>
+                        <div class="star-ratings-sprite"><span style="width:{{ courseInfo.averageLecturerRating }}%" class="star-ratings-sprite-rating"></span></div>
+                    </td>
+                    <td>{{ courseInfo.averageLecturerRating }}%</td>
+                    
+                </tr>
+                <tr>
+                    <th scope="row">Engagement Rating</th>
+                    <td>
+                        <div class="star-ratings-sprite"><span style="width:{{ courseInfo.averageEngagementRating }}%" class="star-ratings-sprite-rating"></span></div>
+                    </td>
+                    <td>{{ courseInfo.averageEngagementRating }}%</td>
+                </tr>
+                <tr>
+                    <th scope="row">Informative Rating</th>
+                    <td>
+                        <div class="star-ratings-sprite"><span style="width:{{ courseInfo.averageInformativeRating }}%" class="star-ratings-sprite-rating"></span></div>
+                    </td>
+                    <td>{{ courseInfo.averageInformativeRating }}%</td>
+                </tr>
+            </tbody>
+            </table>
         </div>
-		
-		<div>
-		<p>Average Overall Rating: {{ courseInfo.averageOverallRating }} </p>
-		<p>Average Lecturer Rating: {{ courseInfo.averageLecturerRating }} </p>
-		<p>Average Engagement Rating: {{ courseInfo.averageEngagementRating }} </p>
-		<p>Average Informative Rating: {{ courseInfo.averageInformativeRating }} </p>
-		</div>
-	
-    <h3>Latest Reviews</h3>
+        <br>
+        <div class="text-center">
+        {% if user.is_authenticated %}
+                {% if courseInfo.name in courseInfo.coursesTakenByUser %}
+                <a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
+                <br>
+                <hr>
+                {% else %}
+                <strong>You can't leave a review for this course</strong>
+                <br>
+                <hr>
+                {% endif %}
+        </div>
+        <h3>Latest Reviews</h3>
         {% if courseInfo.reviews %}
-			{% for courseIndex,dict in courseInfo.reviews.items %}
-				{% if courseIndex <= 5 %}
-					{{ dict.student }}
-					</br>
-					{{ dict.overallRating }}
-					</br>
-					{% if dict.comment %}
-						{{ dict.comment }}
-						</br>
-					{% endif %}
-				{% endif %}
-				</br>
-			{% endfor %}
-				
-        {% else %}
+        <div class="card-group">
+        {% for courseIndex,dict in courseInfo.reviews.items %}
+                {% if courseIndex <= 5 %}
+                <div class="card bg-light mb-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">User: {{ dict.student }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
+                        <div class="star-ratings-sprite"><span style="width:{{ dict.overallRating }}%" class="star-ratings-sprite-rating"></span></div>
+                        {% if dict.comment %}
+                            <hr>
+                            <p class="card-text">{{ dict.comment }}</p>
+                        {% else %}
+                            <hr>
+                            <p class="card-text">There is no comment added.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+        </div>
+                {% else %}
                 <div class="about"><strong>There are no reviews yet.</strong></div>
-		{% endif %}
-		
-		{% if user.is_authenticated %}
-			{% if courseInfo.name in courseInfo.coursesTakenByUser %}
-				<a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
-				<br>
-			{% else %}
-				<strong>You can't leave a review for this course</strong>
-				<br>
-			{% endif %}
-				<br>
-				<h3> Need help? </h3>
-				{% if courseInfo.contactUsers %}
-					<p> Try contacting these students! </p>
-					<ul>
-					{% for contactName,contactEmail in courseInfo.contactUsers.items %}
-						<li> {{ contactName }} : {{ contactEmail }} </li>
-					{% endfor %}
-					</ul>
-				{% else %}
-					<p> Try contacting the university directly </p>
-					<p> University Email Placeholder </p>
-				{% endif %}
-		{% endif %}
+                {% endif %}
+                   
+                <hr>
+                <h3> Need help? </h3>
+                {% if courseInfo.contactUsers %}
+                <p> Try contacting these students! </p>
+                <ul>
+                    {% for contactName,contactEmail in courseInfo.contactUsers.items %}
+                    <li> {{ contactName }} : {{ contactEmail }} </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p> Try contacting the university directly </p>
+                <p> University Email Placeholder </p>
+                {% endif %}
+                {% endif %}
+    </div>
+    </div>
 {% endblock %}

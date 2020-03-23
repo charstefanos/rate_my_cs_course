@@ -149,8 +149,11 @@ footer{
     text-decoration: none;
     font-weight: bold;
 }
-.main h2{
+.main h2, .main h3{
     color: #8e8e8e;
+}
+.main strong{
+    color: #800080;
 }
 .navbar input[type=text] {
   border:solid #b4b4b4; 
@@ -191,7 +194,23 @@ footer{
       -moz-column-gap: 20px;
            column-gap: 20px;
 }
-
+.star-ratings-sprite {
+  background: url("../images/star-rating.png") repeat-x;
+  font-size: 0;
+  height: 21px;
+  line-height: 0;
+  overflow: hidden;
+  width: 110px;
+}  
+.star-ratings-sprite-rating{
+    background: url("../images/star-rating.png") repeat-x;
+    background-position: 0 100%;
+    height: 21px;
+    display:block;  
+}
+.jumbotron{
+    background:transparent !important;
+}
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;

@@ -108,10 +108,10 @@ def course(request, course_name_slug):
             comment = review.comment
 
             reviewDict["student"] = student
-            reviewDict["overallRating"] = overallRating
-            reviewDict["lecturerRating"] = lecturerRating
-            reviewDict["engagementRating"] = engagementRating
-            reviewDict["informativeRating"] = informativeRating
+            reviewDict["overallRating"] = 20*overallRating
+            reviewDict["lecturerRating"] = 20*lecturerRating
+            reviewDict["engagementRating"] = 20*engagementRating
+            reviewDict["informativeRating"] = 20*informativeRating
             reviewDict["comment"] = comment
 
             reviewsDict[index] = reviewDict
@@ -124,10 +124,11 @@ def course(request, course_name_slug):
             averageEngagementRating = 0
             averageInformativeRating = 0
         else:
-            averageOverallRating = sumOverallRating // index
-            averageLecturerRating = sumLecturerRating // index
-            averageEngagementRating = sumEngagementRating // index
-            averageInformativeRating = sumInformativeRating // index
+        #Multiply by 20 (100*rating/5 = 20*rating) to get the rating in percentage 
+            averageOverallRating = 20*(sumOverallRating / index)
+            averageLecturerRating = 20*(sumLecturerRating / index)
+            averageEngagementRating = 20*(sumEngagementRating / index)
+            averageInformativeRating = 20*(sumInformativeRating / index)
 
         # Find all the users who have also this course
         # and have chosen to be contacted
