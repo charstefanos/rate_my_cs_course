@@ -68,6 +68,7 @@
         <br><br>
         <div class="text-center">
         {% if user.is_authenticated %}
+                <div>
                 {% if courseInfo.name in courseInfo.coursesTakenByUser %}
                 <a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
                 <br><br>
@@ -75,13 +76,15 @@
                 <strong>You can't leave a review for this course</strong>
                 <br><br>
                 {% endif %}
+                </div>
         </div>
+        {% endif %}
         <h3>Latest Reviews</h3>
         {% if courseInfo.reviews %}
         <div class="card-deck">
         {% for courseIndex,dict in courseInfo.reviews.items %}
                 {% if courseIndex <= 5 %}
-                <div class="card" style="width: 18rem;">
+                <div class="card text-left" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
@@ -101,7 +104,7 @@
                 {% else %}
                 <div class="about"><strong>There are no reviews yet.</strong></div>
                 {% endif %}
-                   
+        {% if user.is_authenticated %}           
                 <hr>
                 <h3> Need help? </h3>
                 {% if courseInfo.contactUsers %}
