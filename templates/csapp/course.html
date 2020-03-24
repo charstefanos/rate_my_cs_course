@@ -77,14 +77,14 @@
                 <br><br>
                 {% endif %}
                 </div>
-        </div>
         {% endif %}
+        </div>
         <h3>Latest Reviews</h3>
         {% if courseInfo.reviews %}
         <div class="card-deck">
         {% for courseIndex,dict in courseInfo.reviews.items %}
                 {% if courseIndex <= 5 %}
-                <div class="card text-left" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
