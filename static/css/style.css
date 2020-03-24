@@ -211,6 +211,7 @@ footer{
 .jumbotron{
     background:transparent !important;
 }
+
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;

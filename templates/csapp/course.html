@@ -20,6 +20,7 @@
         <strong>Description:</strong>
         {{ courseInfo.description }}
     </p>
+    <br>
     </div>
     
     <div class="container">
@@ -64,25 +65,23 @@
             </tbody>
             </table>
         </div>
-        <br>
+        <br><br>
         <div class="text-center">
         {% if user.is_authenticated %}
                 {% if courseInfo.name in courseInfo.coursesTakenByUser %}
                 <a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
-                <br>
-                <hr>
+                <br><br>
                 {% else %}
                 <strong>You can't leave a review for this course</strong>
-                <br>
-                <hr>
+                <br><br>
                 {% endif %}
         </div>
         <h3>Latest Reviews</h3>
         {% if courseInfo.reviews %}
-        <div class="card-group">
+        <div class="card-deck">
         {% for courseIndex,dict in courseInfo.reviews.items %}
                 {% if courseIndex <= 5 %}
-                <div class="card bg-light mb-3" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
