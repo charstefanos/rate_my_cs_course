@@ -148,10 +148,10 @@ def course(request, course_name_slug):
             averageInformativeRating = 0
         else:
         #Multiply by 20 (100*rating/5 = 20*rating) to get the rating in percentage 
-            averageOverallRating = 20*(sumOverallRating / index)
-            averageLecturerRating = 20*(sumLecturerRating / index)
-            averageEngagementRating = 20*(sumEngagementRating / index)
-            averageInformativeRating = 20*(sumInformativeRating / index)
+            averageOverallRating = round(20*(sumOverallRating / index),1)
+            averageLecturerRating = round(20*(sumLecturerRating / index),1)
+            averageEngagementRating = round(20*(sumEngagementRating / index),1)
+            averageInformativeRating = round(20*(sumInformativeRating / index),1)
 
         # Find all the users who have also this course
         # and have chosen to be contacted

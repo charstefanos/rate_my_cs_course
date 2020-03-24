@@ -78,12 +78,13 @@
                 {% endif %}
                 </div>
         {% endif %}
+		
         </div>
         <h3>Latest Reviews</h3>
         {% if courseInfo.reviews %}
         <div class="card-deck">
         {% for courseIndex,dict in courseInfo.reviews.items %}
-                {% if courseIndex <= 5 %}
+                {% if courseIndex < 5 %}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
@@ -94,16 +95,17 @@
                             <p class="card-text">{{ dict.comment }}</p>
                         {% else %}
                             <hr>
-                            <p class="card-text">There is no comment added.</p>
+                            <p class="card-text">No comment added.</p>
                         {% endif %}
                     </div>
                 </div>
                 {% endif %}
-                {% endfor %}
+        {% endfor %}
         </div>
-                {% else %}
-                <div class="about"><strong>There are no reviews yet.</strong></div>
-                {% endif %}
+        {% else %}
+            <div class="about"><strong>There are no reviews yet.</strong></div>
+        {% endif %}
+		
         {% if user.is_authenticated %}           
                 <hr>
                 <h3> Need help? </h3>
@@ -123,7 +125,7 @@
 				<p> If you are currently a student try this email: socs-teachingadmin@glasgow.ac.uk </p>
 				
                 {% endif %}
-                {% endif %}
+		{% endif %}
     </div>
     </div>
 {% endblock %}
