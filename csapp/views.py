@@ -26,7 +26,7 @@ def home(request):
             averageOverallRating = 0
         else:
             averageOverallRating = sumOverallRating / number_reviews
-            rated_courses[course.name]=averageOverallRating
+        rated_courses[course.name]=averageOverallRating
     
     #Sort the rated courses by the avg overall rating (i.e. the value)
     rated_courses = {k: v for k, v in sorted(rated_courses.items(), key=lambda item: item[1], reverse=True)}
