@@ -6,11 +6,17 @@
 {% endblock %}
 
 {% block body_block %}
-    <h2> My reviews </h2>
+    <h2> Reviews Made </h2>
     <div>
-        {% if errors %}
-            <strong>{{ errors }}</strong>
-        {% endif %}
+		{% if messages %}
+			{% for message in messages %}
+					{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+						{{ message }}
+					{% endif %}
+			{% endfor %}
+			<br>
+		{% endif %}
+		
         {% if reviews_list %}
             {% for review in reviews_list %}
                 <div id='reviewdescription'>
@@ -19,13 +25,23 @@
                     <strong>Lecturer Rating:</strong> {{ review.lecturer_rating }} out of 5<br>
                     <strong>Engagement:</strong> {{ review.engagement }} out of 5<br>
                     <strong>Informative:</strong> {{ review.informative }} out of 5<br>
-                    <strong>Comments:</strong> <br>
-                    {{ review.comment }}<br>
+                    <strong>Comment:</strong> <br>
+					{% if review.comment %}
+						{{ review.comment }}<br>
+					{% else %}
+						No comment added. <br>
+					{% endif %}
+					
+					<a href="{% url 'csapp:write_review' review.course.slug %}"><button class="btn btn-primary">Edit</button></a>
+					<form id="review_delete_form" method="post" action="{% url 'csapp:delete_review' review.course.slug %}">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-primary">Delete</button>
+					</form>
                 </div>
                 <br>
             {% endfor %}
         {% else %}
-            <strong>No reviews to display </strong>
+            <strong>You have not reviewed any course! </strong>
         {% endif %}
     </div>
 {% endblock %}

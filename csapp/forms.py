@@ -78,6 +78,12 @@ class ReviewForm(forms.ModelForm):
         # include all fields in the form.
         exclude = ("student", "course",)
 
+class ReviewDeleteForm(forms.ModelForm):
+    class Meta:
+        model = CourseRating
+        fields = []
+    
+
 
 
 

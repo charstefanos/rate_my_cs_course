@@ -70,7 +70,7 @@
         {% if user.is_authenticated %}
                 <div>
                 {% if courseInfo.name in courseInfo.coursesTakenByUser %}
-                <a href="{% url 'csapp:write_review' courseInfo.slug %}"><button type="write_review" class="btn btn-primary">Leave a Review</button></a>
+                <a href="{% url 'csapp:write_review' courseInfo.slug %}"><button class="btn btn-primary">Leave a Review</button></a>
                 <br><br>
                 {% else %}
                 <strong>You can't leave a review for this course</strong>

@@ -266,6 +266,36 @@ def user_login(request):
     else:
         return render(request, 'csapp/login.html')
 
+def search(request):
+    # Creates a list of dictionaries
+    # Each dictionary includes the name of a course, label
+    # and its url, value
+
+    # The list is then returned as a Json Response to a template,
+    # which is then used by the jQuery code, csapp-searchBarAutocomplete,
+    # to populate the search bar and link each course to its proper page
+    # when its name is clicked
+    courses = Course.objects.all()
+
+    coursesList = []
+    for course in courses:
+        courseDictionary = {}
+        name = course.name
+        year = course.year_in_university
+        if year <= 4:
+            courseType = "undergraduate"
+        else:
+            courseType = "postgraduate"
+        courseSlug = course.slug
+        
+        url = courseType + "/" + courseSlug
+        
+        courseDictionary["label"] = name
+        courseDictionary["value"] = url
+        coursesList.append(courseDictionary)
+
+    return JsonResponse(coursesList, safe=False)
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -307,37 +337,7 @@ def delete_profile(request):
     }
 
     return render(request, 'csapp/profile.html', context_dict)
-
-def search(request):
-    # Creates a list of dictionaries
-    # Each dictionary includes the name of a course, label
-    # and its url, value
-
-    # The list is then returned as a Json Response to a template,
-    # which is then used by the jQuery code, csapp-searchBarAutocomplete,
-    # to populate the search bar and link each course to its proper page
-    # when its name is clicked
-    courses = Course.objects.all()
-
-    coursesList = []
-    for course in courses:
-        courseDictionary = {}
-        name = course.name
-        year = course.year_in_university
-        if year <= 4:
-            courseType = "undergraduate"
-        else:
-            courseType = "postgraduate"
-        courseSlug = course.slug
-        
-        url = courseType + "/" + courseSlug
-        
-        courseDictionary["label"] = name
-        courseDictionary["value"] = url
-        coursesList.append(courseDictionary)
-
-    return JsonResponse(coursesList, safe=False)
-    
+ 
 @login_required
 def write_review(request, course_name_slug):
     context_dict = {}
@@ -381,5 +381,23 @@ def my_reviews(request):
     reviews_list = CourseRating.objects.filter(student=student)
 
     return render(request, 'csapp/my_reviews.html', {'reviews_list': reviews_list})
+
+@login_required
+def delete_review(request, course_name_slug):
+
+    if request.method == 'POST':
+        course = Course.objects.get(slug=course_name_slug)
+        review = CourseRating.objects.get(course = course, student = request.user.userprofile)
+        review.delete()
+        messages.success(request, f'Review deleted successfully!')
+        return redirect(reverse('csapp:my_reviews'))
+    else:
+        review_delete_form = ReviewDeleteForm()
+
+    context_dict = {
+        'review_delete_form': review_delete_form
+    }
+
+    return render(request, 'csapp/my_reviews.html', context_dict)
     
 
