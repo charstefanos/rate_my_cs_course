@@ -6,8 +6,11 @@
 {% endblock %}
 
 {% block body_block %}
-    <h2>Write a review for {{ reviewInfo.courseName }}</h2>
-	
+    <div class="main">
+    <div class="writeReview mx-auto">
+    <div class="jumbotron mx-5 p-5">
+    <h2>Leave a review for {{ reviewInfo.courseName }}</h2>
+	<br>
     {% if reviewInfo.reviewPosted %}
 		<p class="text-center">
 			You have successfully posted your review!
@@ -17,16 +20,19 @@
 		<form id="user_form" method="post">
 			{% csrf_token %}
 			{% for field in reviewInfo.reviewForm.visible_fields %}
-				<div class="radio_list">
+				<div class="radio_list pl-1">
 					<strong>{{ field.label }}</strong>
 				</div>
+                <hr align="left" width="85%">
 			<span> {{ field }}
 				{{ field.errors }}
 			</span>
-			<br>
 			{% endfor %}
-			<br>
+			<br><br>
 			<button type="write_review" class="btn btn-primary">Submit</button>
 		</form>
 	{% endif %}
+</div>
+</div>
+</div>
 {% endblock %}

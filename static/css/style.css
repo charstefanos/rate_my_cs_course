@@ -194,6 +194,7 @@ footer{
       -moz-column-gap: 20px;
            column-gap: 20px;
 }
+/*---Star rating implementation--*/
 .star-ratings-sprite {
   background: url("../images/star-rating.png") repeat-x;
   font-size: 0;
@@ -208,8 +209,32 @@ footer{
     height: 21px;
     display:block;  
 }
+
+
 .jumbotron{
     background:transparent !important;
+}
+
+/*---Write review page elements style--*/
+.writeReview ul{
+    text-align: justify;
+    width: 80%;
+}
+.writeReview ul:after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+}
+.writeReview ul li{
+    display: inline;
+}
+.writeReview input {
+    width: 80%;
+    border-radius: 25px;
+    padding-left: 10px;
+    border:solid #b4b4b4; 
+    resize: auto; 
+    outline-style: none;
 }
 
 /*--- Bootstrap Padding Fix --*/
