@@ -13,15 +13,15 @@ urlpatterns = [
     path('undergraduate/', views.undergraduate, name='undergraduate'),
     path('postgraduate/', views.postgraduate, name='postgraduate'),
     path('opendays/', views.opendays, name='opendays'),
-    path('postgraduate/<slug:course_name_slug>', views.course, name='course'),
-    path('undergraduate/<slug:course_name_slug>', views.course, name='course'),
+    path('postgraduate/<slug:course_name_slug>/', views.course, name='course'),
+    path('undergraduate/<slug:course_name_slug>/', views.course, name='course'),
     path('profile/', views.profile, name='profile'),
-    path('profile/delete', views.delete_profile, name='delete_profile'),
+    path('profile/delete/', views.delete_profile, name='delete_profile'),
     path('search/', views.search, name='search'),
-    path('postgraduate/<slug:course_name_slug>/write_review', views.write_review, name='write_review'),
-    path('undergraduate/<slug:course_name_slug>/write_review', views.write_review, name='write_review'),
-    path('my_reviews', views.my_reviews, name='my_reviews'),
-    path('my_reviews/<slug:course_name_slug>/delete_review', views.delete_review, name='delete_review'),
+    path('postgraduate/<slug:course_name_slug>/write_review/', views.write_review, name='write_review'),
+    path('undergraduate/<slug:course_name_slug>/write_review/', views.write_review, name='write_review'),
+    path('my_reviews/', views.my_reviews, name='my_reviews'),
+    path('my_reviews/<slug:course_name_slug>/delete_review/', views.delete_review, name='delete_review'),
     
 ]
     
