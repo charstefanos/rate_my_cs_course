@@ -136,6 +136,9 @@ footer{
     width: 350px;
     padding: 2rem;
 }
+#bullet.main ul{
+    list-style-type:circle;
+}
 .main ul{
     list-style-type:none;
     padding: 0.1rem;
