@@ -74,14 +74,23 @@ Homepage
         <div class="col-xs-12 col-sm-6 col-md-4">
         <i class="fas fa-star"></i>
         <h3>Top Rated Courses</h3>
-        <p>Top 5</p>
+        {% if courses_rated%}
+        <ul>
+        {% for course in courses_rated %}
+        <li>
+        <a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
+        </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4">
         <i class="fas fa-fire"></i>
         <h3>Most Viewed Courses</h3>
-        {% if courses %}
+        {% if courses_viewed %}
         <ul>
-        {% for course in courses %}
+        {% for course in courses_viewed %}
         <li>
         <a href="{% url 'csapp:course' course.slug %}">{{ course.name }}</a>
         </li>

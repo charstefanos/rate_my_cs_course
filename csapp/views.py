@@ -11,8 +11,31 @@ from django.http import JsonResponse
 
 def home(request):
     context_dict = {}
-    course_list = Course.objects.order_by('-views')[:5]
-    context_dict['courses'] = course_list
+    courses_viewed = Course.objects.order_by('-views')[:5]
+    all_courses = Course.objects.all()
+    rated_courses={}
+    for course in all_courses:
+        reviews = CourseRating.objects.filter(course = course)
+        number_reviews = 0
+        sumOverallRating = 0 
+        for review in reviews:
+            overallRating = review.overall_rating
+            sumOverallRating =  sumOverallRating + overallRating
+            number_reviews = number_reviews + 1
+        if number_reviews == 0:
+            averageOverallRating = 0
+        else:
+            averageOverallRating = sumOverallRating / number_reviews
+            rated_courses[course.name]=averageOverallRating
+    
+    #Sort the rated courses by the avg overall rating (i.e. the value)
+    rated_courses = {k: v for k, v in sorted(rated_courses.items(), key=lambda item: item[1], reverse=True)}
+    top_5 = list(rated_courses.keys())[:5]
+    courses_rated=[]
+    for k in top_5:
+        courses_rated.append(Course.objects.get(name=k))
+    context_dict['courses_viewed'] = courses_viewed
+    context_dict['courses_rated'] = courses_rated
 
     return render(request, 'csapp/home.html', context=context_dict)
 
