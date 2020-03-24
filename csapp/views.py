@@ -78,7 +78,7 @@ def course(request, course_name_slug):
 
         # Find all reviews for this course
         # and compute the various ratings
-        reviews = CourseRating.objects.filter(course = course).order_by('dateTime')
+        reviews = CourseRating.objects.filter(course = course).order_by('-dateTime')
         reviewsDict = {}
 
         index = 0
