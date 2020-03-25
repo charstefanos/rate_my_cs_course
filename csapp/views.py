@@ -261,7 +261,7 @@ def user_login(request):
                 return redirect(reverse('csapp:login'))
             
         else:
-            messages.error(request, 'Invalid login details supplied. Please try again.')
+            messages.error(request, 'Incorrect username or password')
             return redirect(reverse('csapp:login'))
     else:
         return render(request, 'csapp/login.html')
@@ -327,7 +327,7 @@ def delete_profile(request):
     if request.method == 'POST':
         user = request.user
         user.delete()
-        messages.success(request, f'Your profile has been deleted successfully!')
+        messages.success(request, f'Profile deleted successfully!')
         return redirect(reverse('csapp:login'))
     else:
         user_delete_form = UserDeleteForm(instance=request.user)

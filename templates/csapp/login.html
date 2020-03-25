@@ -7,16 +7,6 @@ Login
 
 {% block body_block %}
 
-{% if messages %}
-	{% for message in messages %}
-		{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-			{{ message }}
-		{% endif %}
-		{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-			{{ message }}
-		{% endif %}
-	{% endfor %}
-{% endif %}
 
 <div class="main container-form">
     <h2 class="text-center my-4">Login</h2>
@@ -31,7 +21,17 @@ Login
     <p>
     Don't have an account?
     <a href="{% url 'csapp:register' %}">Sign up!</a>
-</p>
+	</p>
+	
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+				<p>{{ message }}</p>
+			{% endif %}
+			{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+				<p>{{ message }}</p>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 </div>
-
 {% endblock %}
