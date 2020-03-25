@@ -42,7 +42,7 @@ class UserProfileForm(forms.ModelForm):
             'current_student' : 'Are you currently a student at University of Glasgow?',
             'year_of_studies' : 'What year are you currently in?',
             'courses' : 'What courses did you take?',
-            'contact' : 'Would you like your name and email to be visible for others to see?',
+            'contact' : 'Would you like your username and email to be visible for others to see?',
             }
 
         widgets = {
