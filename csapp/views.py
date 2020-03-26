@@ -310,7 +310,7 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, f'Your profile was updated successfully!')
+            messages.success(request, 'Your profile was updated successfully!')
             return redirect(reverse('csapp:profile'))
     else:
         user_form = UserUpdateForm(instance=request.user)
@@ -327,7 +327,7 @@ def delete_profile(request):
     if request.method == 'POST':
         user = request.user
         user.delete()
-        messages.success(request, f'Profile deleted successfully!')
+        messages.success(request, 'Profile deleted successfully!')
         return redirect(reverse('csapp:login'))
     else:
         user_delete_form = UserDeleteForm(instance=request.user)
@@ -389,7 +389,7 @@ def delete_review(request, course_name_slug):
         course = Course.objects.get(slug=course_name_slug)
         review = CourseRating.objects.get(course = course, student = request.user.userprofile)
         review.delete()
-        messages.success(request, f'Review deleted successfully!')
+        messages.success(request, 'Review deleted successfully!')
         return redirect(reverse('csapp:my_reviews'))
     else:
         review_delete_form = ReviewDeleteForm()

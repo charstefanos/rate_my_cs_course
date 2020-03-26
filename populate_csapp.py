@@ -3,8 +3,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','rate_my_cs_course.settings')
 
 import django
 django.setup()
-from csapp.models import Course
-
+from django.contrib.auth.models import User
+from csapp.models import *
 
 def populate():
     undergraduate_1year_courses = [
@@ -365,9 +365,388 @@ def populate():
         'description':'Web Science is the study of the World Wide Web (WWW), its components, facets and characteristics and the impact it has on both society and technology. The World Wide Web changed the way in which we create information, communicate and interact. New models of social networks (LinkedIn, Facebook, etc.) create opportunities, which were not available before. Exploiting such data and networks for the benefit of individuals and organizations has become a key in our knowledge society.',
         'year_in_university':5}
     ]
+    year1_students = [
+        {'username':'Arthur',
+         'password':'pass',
+         'firstName':'Arthur',
+         'lastName':'Tull',
+         'email':'ArthurMTull@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':1,
+         'courses':['1CT INTRODUCTION TO COMPUTATIONAL THINKING COMPSCI1016',
+                    '1S SYSTEMS COMPSCI1018',
+                    '1F - COMPUTING FUNDAMENTALS COMPSCI1006',
+                    'COMPUTING SCIENCE 1PX (ALTERNATE ROUTE) COMPSCI1017',
+                    'SPATIAL SKILLS TRAINING 1 COMPSCI1026'],
+         'contact':True},
+        {'username':'Melvin',
+         'password':'pass',
+         'firstName':'Melvin',
+         'lastName':'Booker',
+         'email':'MelvinPBooker@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':1,
+         'courses':['1S SYSTEMS COMPSCI1018',
+                    '1F - COMPUTING FUNDAMENTALS COMPSCI1006',
+                    'COMPUTING SCIENCE 1P (STANDARD ROUTE) COMPSCI1001',
+                    'HOW TO LEARN A NEW LANGUAGE COMPSCI1020',
+                    'PRACTICAL ALGORITHMS COMPSCI1021',
+                    'SPATIAL SKILLS TRAINING 1 COMPSCI1026',
+                    'TESTING AND SOFTWARE IMPROVEMENT COMPSCI1022',
+                    'WORKPLACE ASSESSMENT YEAR 1 COMPSCI1024'],
+         'contact':False},
+        {'username':'James',
+         'password':'pass',
+         'firstName':'James',
+         'lastName':'Morris',
+         'email':'JamesGMorris@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':1,
+         'courses':['1CT INTRODUCTION TO COMPUTATIONAL THINKING COMPSCI1016',
+                    '1S SYSTEMS COMPSCI1018',
+                    '1F - COMPUTING FUNDAMENTALS COMPSCI1006',
+                    'COMPUTING SCIENCE 1PX (ALTERNATE ROUTE) COMPSCI1017',
+                    'FOUNDATIONS OF PROFESSIONAL SOFTWARE ENGINEERING COMPSCI1019',
+                    'WEB APPLICATION SYSTEMS COMPSCI1023',
+                    'WORKPLACE ASSESSMENT YEAR 1 COMPSCI1024'],
+         'contact':False},
+        {'username':'Mary',
+         'password':'pass',
+         'firstName':'Mary',
+         'lastName':'Dees',
+         'email':'MaryJDees@dayrep.com',
+         'currentStudent':True,
+         'yearStudying':1,
+         'courses':['1S SYSTEMS COMPSCI1018',
+                    '1F - COMPUTING FUNDAMENTALS COMPSCI1006',
+                    'COMPUTING SCIENCE 1P (HALF COURSE) COMPSCI1005',
+                    'FOUNDATIONS OF PROFESSIONAL SOFTWARE ENGINEERING COMPSCI1019',
+                    'PRACTICAL ALGORITHMS COMPSCI1021',
+                    'TESTING AND SOFTWARE IMPROVEMENT COMPSCI1022',
+                    'WEB APPLICATION SYSTEMS COMPSCI1023'],
+         'contact':True},
+        {'username':'Bret',
+         'password':'pass',
+         'firstName':'Bret',
+         'lastName':'Woolfolk',
+         'email':'BretFWoolfolk@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':1,
+         'courses':['COMPUTING SCIENCE 1P (HALF COURSE) COMPSCI1005',
+                    'FOUNDATIONS OF PROFESSIONAL SOFTWARE ENGINEERING COMPSCI1019',
+                    'HOW TO LEARN A NEW LANGUAGE COMPSCI1020',
+                    'PRACTICAL ALGORITHMS COMPSCI1021',
+                    'SPATIAL SKILLS TRAINING 1 COMPSCI1026',
+                    'TESTING AND SOFTWARE IMPROVEMENT COMPSCI1022',
+                    'WEB APPLICATION SYSTEMS COMPSCI1023',
+                    'WORKPLACE ASSESSMENT YEAR 1 COMPSCI1024'],
+         'contact':True}, 
+    ]
+    year2_students = [
+        {'username':'Ada',
+         'password':'pass',
+         'firstName':'Ada',
+         'lastName':'Sartain',
+         'email':'AdaMSartain@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':2,
+         'courses':['ALGORITHMIC FOUNDATIONS 2 COMPSCI2003',
+                    'ALGORITHMS & DATA STRUCTURES 2 COMPSCI2007',
+                    'JAVA PROGRAMMING 2 COMPSCI2001',
+                    'NETWORKS AND OPERATING SYSTEMS ESSENTIALS 2 COMPSCI2024',
+                    'OBJECT-ORIENTED SOFTWARE ENGINEERING 2 COMPSCI2008',
+                    'WEB APPLICATION DEVELOPMENT 2 COMPSCI2021'],
+         'contact':True},
+        {'username':'Henry',
+         'password':'pass',
+         'firstName':'Henry',
+         'lastName':'Flannigan',
+         'email':'HenryTFlannigan@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':2,
+         'courses':['ALGORITHMIC FOUNDATIONS 2 COMPSCI2003',
+                    'ALGORITHMS & DATA STRUCTURES 2 COMPSCI2007',
+                    'JAVA PROGRAMMING 2 COMPSCI2001',
+                    'NETWORKS AND OPERATING SYSTEMS ESSENTIALS 2 COMPSCI2024',
+                    'OBJECT-ORIENTED SOFTWARE ENGINEERING 2 COMPSCI2008',
+                    'WEB APPLICATION DEVELOPMENT 2 COMPSCI2021'],
+         'contact':False},
+        {'username':'Antwan',
+         'password':'pass',
+         'firstName':'Antwan',
+         'lastName':'Pool',
+         'email':'AntwanEPool@armyspy.com',
+         'currentStudent':True,
+         'yearStudying':2,
+         'courses':['ALGORITHMIC FOUNDATIONS 2 COMPSCI2003',
+                    'ALGORITHMS & DATA STRUCTURES 2 COMPSCI2007',
+                    'JAVA PROGRAMMING 2 COMPSCI2001',
+                    'NETWORKS AND OPERATING SYSTEMS ESSENTIALS 2 COMPSCI2024',
+                    'OBJECT-ORIENTED SOFTWARE ENGINEERING 2 COMPSCI2008',
+                    'WEB APPLICATION DEVELOPMENT 2 COMPSCI2021'],
+         'contact':False},
+        {'username':'MelvinM',
+         'password':'pass',
+         'firstName':'Melvin',
+         'lastName':'Cox',
+         'email':'MelvinMCox@dayrep.com',
+         'currentStudent':True,
+         'yearStudying':2,
+         'courses':['ALGORITHMIC FOUNDATIONS 2 COMPSCI2003',
+                    'ALGORITHMS & DATA STRUCTURES 2 COMPSCI2007',
+                    'JAVA PROGRAMMING 2 COMPSCI2001',
+                    'NETWORKS AND OPERATING SYSTEMS ESSENTIALS 2 COMPSCI2024',
+                    'OBJECT-ORIENTED SOFTWARE ENGINEERING 2 COMPSCI2008',
+                    'WEB APPLICATION DEVELOPMENT 2 COMPSCI2021'],
+         'contact':True},
+        {'username':'Heather',
+         'password':'pass',
+         'firstName':'Heather',
+         'lastName':'Barron',
+         'email':'HeatherRBarron@dayrep.com',
+         'currentStudent':True,
+         'yearStudying':2,
+         'courses':['ALGORITHMIC FOUNDATIONS 2 COMPSCI2003',
+                    'ALGORITHMS & DATA STRUCTURES 2 COMPSCI2007',
+                    'JAVA PROGRAMMING 2 COMPSCI2001',
+                    'NETWORKS AND OPERATING SYSTEMS ESSENTIALS 2 COMPSCI2024',
+                    'OBJECT-ORIENTED SOFTWARE ENGINEERING 2 COMPSCI2008',
+                    'WEB APPLICATION DEVELOPMENT 2 COMPSCI2021'],
+         'contact':False},
+    ]
+    year3_students = [
+        {'username':'George',
+         'password':'pass',
+         'firstName':'George',
+         'lastName':'Johnson',
+         'email':'GeorgeNJohnson@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':3,
+         'courses':['SOFTWARE ENGINEERING M3 COMPSCI3005',
+                    'TEAM PROJECT 3 COMPSCI3004'],
+         'contact':True},
+        {'username':'Robert',
+         'password':'pass',
+         'firstName':'Robert',
+         'lastName':'Mumford',
+         'email':'RobertBMumford@jourrapide.com',
+         'currentStudent':True,
+         'yearStudying':3,
+         'courses':['SOFTWARE ENGINEERING M3 COMPSCI3005',
+                    'TEAM PROJECT 3 COMPSCI3004'],
+         'contact':False},
+        {'username':'Madeline',
+         'password':'pass',
+         'firstName':'Madeline',
+         'lastName':'Karsten',
+         'email':'MadelineTKarsten@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':3,
+         'courses':['SOFTWARE ENGINEERING M3 COMPSCI3005',
+                    'TEAM PROJECT 3 COMPSCI3004'],
+         'contact':True},
+        {'username':'Martha',
+         'password':'pass',
+         'firstName':'Martha',
+         'lastName':'Mattingly',
+         'email':'MarthaTMattingly@armyspy.com',
+         'currentStudent':True,
+         'yearStudying':3,
+         'courses':['SOFTWARE ENGINEERING M3 COMPSCI3005',
+                    'TEAM PROJECT 3 COMPSCI3004'],
+         'contact':False},
+        {'username':'Oleta',
+         'password':'pass',
+         'firstName':'Oleta',
+         'lastName':'Logue',
+         'email':'OletaGLogue@dayrep.com',
+         'currentStudent':True,
+         'yearStudying':3,
+         'courses':['SOFTWARE ENGINEERING M3 COMPSCI3005',
+                    'TEAM PROJECT 3 COMPSCI3004'],
+         'contact':False},
+    ]
+    year4_students = [
+        {'username':'Tom',
+         'password':'pass',
+         'firstName':'Tom',
+         'lastName':'Dixon',
+         'email':'TomCDixon@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':4,
+         'courses':['ADVANCED SOFTWARE ENGINEERING PRACTICES (H) COMPSCI4071',
+                    'ARTIFICIAL INTELLIGENCE (H) COMPSCI4004',
+                    'SAFETY-CRITICAL SYSTEMS DEVELOPMENT (H) COMPSCI4045',
+                    'TEAM PROJECT ESE (H) COMPSCI4044',
+                    'OPERATING SYSTEMS (H) COMPSCI4011',
+                    'RECOMMENDER SYSTEMS (H) COMPSCI4075',
+                    'WEB SCIENCE (SIT) SIT4053',
+                    'PROGRAMMING COMPSCI4039'],
+         'contact':True},
+        {'username':'Kerry',
+         'password':'pass',
+         'firstName':'Kerry',
+         'lastName':'Lesniak',
+         'email':'KerryTLesniak@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':4,
+         'courses':['ADVANCED SOFTWARE ENGINEERING PRACTICES (H) COMPSCI4071',
+                    'ARTIFICIAL INTELLIGENCE (H) COMPSCI4004',
+                    'SAFETY-CRITICAL SYSTEMS DEVELOPMENT (H) COMPSCI4045',
+                    'WEB SCIENCE (SIT) SIT4053',
+                    'PROGRAMMING COMPSCI4039'],
+         'contact':False},
+        {'username':'DavidB',
+         'password':'pass',
+         'firstName':'David',
+         'lastName':'Morgan',
+         'email':'DavidBMorgan@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':4,
+         'courses':['SAFETY-CRITICAL SYSTEMS DEVELOPMENT (H) COMPSCI4045',
+                    'TEAM PROJECT ESE (H) COMPSCI4044',
+                    'OPERATING SYSTEMS (H) COMPSCI4011',
+                    'RECOMMENDER SYSTEMS (H) COMPSCI4075',
+                    'WEB SCIENCE (SIT) SIT4053',
+                    'PROGRAMMING COMPSCI4039'],
+         'contact':True},
+        {'username':'JamesB',
+         'password':'pass',
+         'firstName':'James',
+         'lastName':'Simpson',
+         'email':'JamesBSimpson@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':4,
+         'courses':['ARTIFICIAL INTELLIGENCE (H) COMPSCI4004',
+                    'TEAM PROJECT ESE (H) COMPSCI4044',
+                    'OPERATING SYSTEMS (H) COMPSCI4011',
+                    'WEB SCIENCE (SIT) SIT4053',
+                    'PROGRAMMING COMPSCI4039'],
+         'contact':True},
+        {'username':'WillieH',
+         'password':'pass',
+         'firstName':'Willie',
+         'lastName':'McReynolds',
+         'email':'WillieHMcReynolds@dayrep.com',
+         'currentStudent':True,
+         'yearStudying':4,
+         'courses':['ADVANCED SOFTWARE ENGINEERING PRACTICES (H) COMPSCI4071',
+                    'ARTIFICIAL INTELLIGENCE (H) COMPSCI4004',
+                    'SAFETY-CRITICAL SYSTEMS DEVELOPMENT (H) COMPSCI4045',
+                    'TEAM PROJECT ESE (H) COMPSCI4044',
+                    'OPERATING SYSTEMS (H) COMPSCI4011',
+                    'RECOMMENDER SYSTEMS (H) COMPSCI4075',
+                    'WEB SCIENCE (SIT) SIT4053',
+                    'PROGRAMMING COMPSCI4039'],
+         'contact':False},
+    ]
+    year5_students = [
+        {'username':'BrunaC',
+         'password':'pass',
+         'firstName':'Bruna',
+         'lastName':'Torres',
+         'email':'BrunaCTorres@jourrapide.com',
+         'currentStudent':True,
+         'yearStudying':5,
+         'courses':['ARTIFICIAL INTELLIGENCE (M) COMPSCI5087',
+                    'MSCI RESEARCH PROPOSAL AND PROJECT (HALF) COMPSCI5072P',
+                    'MOBILE HUMAN-COMPUTER INTERACTION (M) COMPSCI5015',
+                    'DISTRIBUTED AND PARALLEL TECHNOLOGIES (M) COMPSCI5084'],
+         'contact':False},
+        {'username':'AnnieP',
+         'password':'pass',
+         'firstName':'Annie',
+         'lastName':'Palmer',
+         'email':'AnniePPalmer@rhyta.com',
+         'currentStudent':True,
+         'yearStudying':5,
+         'courses':['ARTIFICIAL INTELLIGENCE (M) COMPSCI5087',
+                    'MSCI RESEARCH PROPOSAL AND PROJECT (HALF) COMPSCI5072P',
+                    'HUMAN-CENTRED SECURITY (M) COMPSCI5060',
+                    'ADVANCED SYSTEMS PROGRAMMING (M) COMPSCI5083',
+                    'MACHINE LEARNING FOR DATA SCIENTISTS (M) COMPSCI5090',
+                    'DISTRIBUTED AND PARALLEL TECHNOLOGIES (M) COMPSCI5084'],
+         'contact':True},
+        {'username':'GaryS',
+         'password':'pass',
+         'firstName':'Gary',
+         'lastName':'Hackler',
+         'email':'GarySHackler@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':5,
+         'courses':['MSCI RESEARCH PROPOSAL AND PROJECT (HALF) COMPSCI5072P',
+                    'HUMAN-CENTRED SECURITY (M) COMPSCI5060',
+                    'ADVANCED SYSTEMS PROGRAMMING (M) COMPSCI5083',
+                    'MACHINE LEARNING FOR DATA SCIENTISTS (M) COMPSCI5090',
+                    'SOFTWARE ENGINEERING (M) COMPSCI5059',
+                    'MOBILE HUMAN-COMPUTER INTERACTION (M) COMPSCI5015',
+                    'DISTRIBUTED AND PARALLEL TECHNOLOGIES (M) COMPSCI5084'],
+         'contact':False},
+        {'username':'HollyK',
+         'password':'pass',
+         'firstName':'Holly',
+         'lastName':'Stewart',
+         'email':'HollyKStewart@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':5,
+         'courses':['MSCI RESEARCH PROPOSAL AND PROJECT (HALF) COMPSCI5072P',
+                    'HUMAN-CENTRED SECURITY (M) COMPSCI5060',
+                    'SOFTWARE ENGINEERING (M) COMPSCI5059',
+                    'MOBILE HUMAN-COMPUTER INTERACTION (M) COMPSCI5015',
+                    'DISTRIBUTED AND PARALLEL TECHNOLOGIES (M) COMPSCI5084'],
+         'contact':True},
+        {'username':'EdwinO',
+         'password':'pass',
+         'firstName':'Edwin',
+         'lastName':'Bow',
+         'email':'EdwinOBow@teleworm.us',
+         'currentStudent':True,
+         'yearStudying':5,
+         'courses':['MSCI RESEARCH PROPOSAL AND PROJECT (HALF) COMPSCI5072P',
+                    'HUMAN-CENTRED SECURITY (M) COMPSCI5060',
+                    'ADVANCED SYSTEMS PROGRAMMING (M) COMPSCI5083',
+                    'MACHINE LEARNING FOR DATA SCIENTISTS (M) COMPSCI5090',
+                    'SOFTWARE ENGINEERING (M) COMPSCI5059',
+                    'MOBILE HUMAN-COMPUTER INTERACTION (M) COMPSCI5015',
+                    'DISTRIBUTED AND PARALLEL TECHNOLOGIES (M) COMPSCI5084'],
+         'contact':True},
+    ]
     
+    non_students = [
+        {'username':'GertrudeR',
+         'password':'pass',
+         'firstName':'Gertrude',
+         'lastName':'Turner',
+         'email':'GertrudeRTurner@jourrapide.com',
+         'currentStudent':False},
+        {'username':'RubenA',
+         'password':'pass',
+         'firstName':'Ruben',
+         'lastName':'Hanson',
+         'email':'RubenAHanson@rhyta.com',
+         'currentStudent':False},
+        {'username':'DavidW',
+         'password':'pass',
+         'firstName':'David',
+         'lastName':'Milton',
+         'email':'DavidWMilton@dayrep.com',
+         'currentStudent':False},
+        {'username':'JamesN',
+         'password':'pass',
+         'firstName':'James',
+         'lastName':'Beck',
+         'email':'JamesNBeck@armyspy.com',
+         'currentStudent':False},
+        {'username':'CharlesS',
+         'password':'pass',
+         'firstName':'Charles',
+         'lastName':'Harding',
+         'email':'CharlesSHarding@rhyta.com',
+         'currentStudent':False},
+    ]
+        
     all_courses = [undergraduate_1year_courses,undergraduate_2year_courses,undergraduate_3year_courses,undergraduate_4year_courses,postgraduate_courses]
-
+    example_users = [year1_students, year2_students, year3_students, year4_students, year5_students, non_students]
 
     # The code below goes through the all_courses list, then for each sublist, adds the courses.
     for cat in all_courses:
@@ -381,6 +760,19 @@ def populate():
     for c in Course.objects.all():
             print(f'{c}')
 
+    # The code below goes through the example_users list, then for each sublist, creates the user and user profile.
+    for category in example_users:
+        if category == non_students:
+            for user in category:
+                add_non_student(user['username'], user['password'], user['firstName'], user['lastName'], user['email'], user['currentStudent'])
+        else:
+            for user in category:
+                add_student(user['username'], user['password'], user['firstName'], user['lastName'], user['email'], user['currentStudent'], user['yearStudying'], user['courses'], user['contact'])
+
+    # Print out the user profiles we have added.
+    for userProfile in UserProfile.objects.all():
+        print(f'{userProfile}')
+    
 
 def add_course(name, description, year_in_university,views=0):
     c = Course.objects.get_or_create(name=name)[0]
@@ -390,6 +782,40 @@ def add_course(name, description, year_in_university,views=0):
     c.save()
     return c
 
+def add_student(username, password, firstName, lastName, email, currentStudent, yearStudying, courses, contact):
+    userObject = User.objects.get_or_create(username=username)[0]
+    userObject.set_password(password)
+    userObject.save()
+     
+    userProfile = UserProfile.objects.get_or_create(user=userObject)[0]
+    userProfile.first_name = firstName
+    userProfile.last_name = lastName
+    userProfile.email = email
+    userProfile.current_student = currentStudent
+    userProfile.year_of_studies = yearStudying
+
+    for course in courses:
+        courseObject = Course.objects.get(name = course)
+        userProfile.courses.add(courseObject)
+            
+    userProfile.contact = contact
+    userProfile.save()
+    return userProfile
+
+def add_non_student(username, password, firstName, lastName, email, currentStudent):
+    userObject = User.objects.get_or_create(username=username)[0]
+    userObject.set_password(password)
+    userObject.save()
+     
+    userProfile = UserProfile.objects.get_or_create(user=userObject)[0]
+    userProfile.first_name = firstName
+    userProfile.last_name = lastName
+    userProfile.email = email
+    userProfile.current_student = currentStudent
+    
+    userProfile.save()
+    return userProfile
+    
 # Start execution here!
 if __name__ == '__main__':
     print('Starting CSapp population script...')
