@@ -2,6 +2,10 @@
 {% extends 'csapp/base.html' %}
 {% load staticfiles %}
 
+	{% block js_block %}
+	<script src="{% static 'js/csapp-OnClickViewAllReviews.js' %}"></script>
+	{% endblock %}
+
     {% block title_block %}
 	{{ courseInfo.name }}
     {% endblock %}
@@ -85,7 +89,7 @@
         {% if courseInfo.reviews %}
         <div class="card-deck">
         {% for courseIndex,dict in courseInfo.reviews.items %}
-                {% if courseIndex < 5 %}
+                {% if courseIndex < 4 %}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
@@ -100,9 +104,32 @@
                         {% endif %}
                     </div>
                 </div>
+				{% else %}
+				<div class="hidden_reviews" hidden>
+				<div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">User: {{ dict.student }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
+                        <div class="star-ratings-sprite"><span style="width:{{ dict.overallRating }}%" class="star-ratings-sprite-rating"></span></div>
+                        {% if dict.comment %}
+                            <hr>
+                            <p class="card-text">{{ dict.comment }}</p>
+                        {% else %}
+                            <hr>
+                            <p class="card-text">No comment added.</p>
+                        {% endif %}
+                    </div>
+                </div>
+				</div>
                 {% endif %}
         {% endfor %}
         </div>
+		<br>
+		{% if courseInfo.reviews.5 %}
+			<div class="text-center">
+				<button id="view_all_reviews_button" class="btn btn-primary">View All Reviews</button>
+			</div>
+		{% endif %}
         {% else %}
             <div class="about"><strong>There are no reviews yet.</strong></div>
         {% endif %}
