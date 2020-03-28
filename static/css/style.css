@@ -240,6 +240,13 @@ footer{
     outline-style: none;
 }
 
+/*---Course page reviews shown - split into rows--*/
+.card-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 1rem;
+}
+
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;

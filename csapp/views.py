@@ -11,7 +11,11 @@ from django.http import JsonResponse
 
 def home(request):
     context_dict = {}
+    
+    #Find the most viewed courses
     courses_viewed = Course.objects.order_by('-views')[:5]
+    
+    #Find the top rated courses
     all_courses = Course.objects.all()
     rated_courses={}
     for course in all_courses:
