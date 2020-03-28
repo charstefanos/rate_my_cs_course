@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from csapp.models import *
+from django_starfield import Stars
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -66,11 +67,10 @@ class UserProfileForm(forms.ModelForm):
 
 #This is some testing for the reviews but havent been tested yet
 class ReviewForm(forms.ModelForm):
-    CHOICES = ((1, 'Terrible'), (2, 'Bad'), (3, 'Average'), (4, 'Good'), (5, 'Excellent'))
-    overall_rating = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    lecturer_rating = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    engagement = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-    informative = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
+    overall_rating = forms.IntegerField(widget=Stars)
+    lecturer_rating = forms.IntegerField(widget=Stars)
+    engagement = forms.IntegerField(widget=Stars)
+    informative = forms.IntegerField(widget=Stars)
     comment = forms.CharField(required=False)
 
     class Meta:
