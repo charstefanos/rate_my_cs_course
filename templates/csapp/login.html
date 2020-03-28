@@ -21,17 +21,17 @@ Login
     <p>
     Don't have an account?
     <a href="{% url 'csapp:register' %}">Sign up!</a>
-	</p>
+    </p>
 	
-	{% if messages %}
-		{% for message in messages %}
-			{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-				<p>{{ message }}</p>
-			{% endif %}
-			{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-				<p>{{ message }}</p>
-			{% endif %}
-		{% endfor %}
-	{% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p>{{ message }}</p>
+            {% endif %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <p>{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

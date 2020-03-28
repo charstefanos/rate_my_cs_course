@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 <html>
-	<head>
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -14,20 +14,20 @@
         <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
 		
-		<!-- jQuery and jQuery UI -->
-		<link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.min.css' %}" type="text/css" />
-		<script src = "{% static 'js/jquery-3.4.1.min.js' %}"></script>
-		<script src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
-		<script src="{% static 'js/csapp-searchBarAutocomplete.js' %}"></script>
+        <!-- jQuery and jQuery UI -->
+        <link rel="stylesheet" href="{% static 'js/jquery-ui/jquery-ui.min.css' %}" type="text/css" />
+        <script src = "{% static 'js/jquery-3.4.1.min.js' %}"></script>
+        <script src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
+        <script src="{% static 'js/csapp-searchBarAutocomplete.js' %}"></script>
 		
-		{% block js_block %}
-		{% endblock %}
+        {% block js_block %}
+        {% endblock %}
 		
-		<title>
-			Rate my CS course -
-			{% block title_block %}
-            A WAD2 Group Project
-			{% endblock %}
+        <title>
+            Rate my CS course -
+            {% block title_block %}
+                A WAD2 Group Project
+            {% endblock %}
         </title>
     </head>
 	

@@ -10,29 +10,29 @@
     <div class="writeReview mx-auto">
     <div class="jumbotron mx-5 p-5">
     <h2>Leave a review for {{ reviewInfo.courseName }}</h2>
-	<br>
+    <br>
     {% if reviewInfo.reviewPosted %}
-		<p class="text-center">
-			You have successfully posted your review!
-		</p>
-		<br/>
+        <p class="text-center">
+            You have successfully posted your review!
+        </p>
+        <br/>
     {% else %}
-		<form id="user_form" method="post">
-			{% csrf_token %}
-			{% for field in reviewInfo.reviewForm.visible_fields %}
-				<div class="radio_list pl-1">
-					<strong>{{ field.label }}</strong>
-				</div>
+        <form id="user_form" method="post">
+            {% csrf_token %}
+            {% for field in reviewInfo.reviewForm.visible_fields %}
+                <div class="radio_list pl-1">
+                    <strong>{{ field.label }}</strong>
+                </div>
                 <hr align="left" width="85%">
-			<span> {{ field }}
-				{{ field.errors }}
-			</span>
-			{% endfor %}
-			<br><br>
-			<button type="submit" class="btn btn-primary">Submit</button>
-			<button type="reset"  class="btn btn-primary">Reset</button>
-		</form>
-	{% endif %}
+            <span> {{ field }}
+                {{ field.errors }}
+            </span>
+            {% endfor %}
+            <br><br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset"  class="btn btn-primary">Reset</button>
+        </form>
+    {% endif %}
 </div>
 </div>
 </div>

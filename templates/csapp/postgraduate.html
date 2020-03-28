@@ -2,20 +2,20 @@
 {% load staticfiles %}
 
 {% block title_block %}
-Postgraduate Page
+    Postgraduate Page
 {% endblock %}
 
 {% block body_block %}
 <div class="main pb-4">
     <h2 class="text-center my-4"> Postgraduate Courses </h2>
-	{% if courses %}
+    {% if courses %}
     <div class="postgrad-container px-5 py-3 mx-5">
     <ul>
-		{% for key,value in courses.items %}
+        {% for key,value in courses.items %}
         <li> <a href= {{ value.1 }} >{{ key }}</a>
-            {% endfor %}
+        {% endfor %}
         </ul>
     </div>
-        {% endif %}
+    {% endif %}
     </div>
     {% endblock %}
