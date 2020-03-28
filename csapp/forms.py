@@ -71,7 +71,7 @@ class ReviewForm(forms.ModelForm):
     lecturer_rating = forms.IntegerField(widget=Stars)
     engagement = forms.IntegerField(widget=Stars)
     informative = forms.IntegerField(widget=Stars)
-    comment = forms.CharField(required=False)
+    comment = forms.CharField(required=False, widget=forms.Textarea(attrs={'class' : 'reviewComment','placeholder': 'Leave a comment for this course (optional). .'}))
 
     class Meta:
         model = CourseRating

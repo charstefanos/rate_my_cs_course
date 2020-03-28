@@ -219,27 +219,16 @@ footer{
 }
 
 /*---Write review page elements style--*/
-.writeReview ul{
-    text-align: justify;
-    width: 80%;
-}
-.writeReview ul:after {
-    content: "";
-    width: 100%;
-    display: inline-block;
-}
-.writeReview ul li{
-    display: inline;
-}
-.writeReview input {
-    width: 80%;
+.reviewComment{
+    width: 50vw;
+    height: 100px;
     border-radius: 25px;
     padding-left: 10px;
     border:solid #b4b4b4; 
-    resize: auto; 
+    overflow-y: auto; 
+    resize: none;
     outline-style: none;
 }
-
 /*---Course page reviews shown - split into rows--*/
 .card-deck {
     display: grid;
