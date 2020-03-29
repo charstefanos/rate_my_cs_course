@@ -5,9 +5,24 @@
     About Page
 {% endblock %}
 
+
 {% block body_block %}
-    This is the about page!
-    {% if user.is_authenticated %}
-        Hi {{ user.username}}!
-    {% endif %}
+<div class="main px-5 mx-5 mb-5">
+    <h2 class="text-center my-4"> About Page </h2>
+<h2>About us </h2>
+	<p>
+        We are a small group of Computer Science students that were tired of choosing our courses based on their description and nothing more. We wanted
+        to be able to hear what students have to say about each course, in order to provide us and every other Computer Science student
+        a more useful guide on choosing our courses for the following year. We came up with the idea to give students a platform where they
+        could freely express how they feel about the course and rate each course in order to help other students. Students are able to rate their current courses based on: 
+	</p>
+	<ul style="list-style-type: disc; padding-left:40px">
+		<li>their overall satisfaction with the course</li>
+		<li>their satisfaction with the lecturer</li>
+		<li>how engaging the course is</li>
+		<li>how informative the course is</li>
+		<li>and also leave comments about the course</li>
+	</ul>  	
+</div>
+
 {% endblock %}
