@@ -137,15 +137,14 @@
                 <hr>
                 <h3> Need help? </h3>
                 {% if courseInfo.contactUsers %}
-                <p> Try contacting these students! </p>
+                <p> Try contacting these students: </p>
                 <ul style="list-style-type: disc; padding-left:30px">
                     {% for contactName,contactEmail in courseInfo.contactUsers.items %}
                     <li> {{ contactName }} : {{ contactEmail }} </li>
                     {% endfor %}
                 </ul>
                 {% else %}
-                <p> Try contacting the university directly </p>
-                <p> If you are applying try these emails: </p>
+                <p> Try contacting the university directly through these emails: </p>
                 <ul style="list-style-type: disc; padding-left:30px">
                 <li> For Undergraduate Queries: info@dcs.gla.ac.uk </li>
                 <li> For Postgraduate Study Queries: socs-pgt-director@dcs.gla.ac.uk </li>

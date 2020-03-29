@@ -9,15 +9,16 @@
     <div class="main px-5 mx-5 mb-5">
     <h2 class="text-center my-4"> Your Reviews </h2>
     <br>
-    <div>
+    <div class="text-center">
     {% if messages %}
         {% for message in messages %}
             {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
                 {{ message }}
+                <br><br>
             {% endif %}
         {% endfor %}
-        <br>
     {% endif %}
+    </div>
     
     {% if reviews_list %}
         <div class="card-deck">
@@ -79,6 +80,5 @@
         <strong>You have not reviewed any course! </strong>
         <p> To review a chosen course, go to the course's page and click the "Leave Review" button </p>
     {% endif %}
-    
-    </div>
+  
 {% endblock %}
