@@ -19,7 +19,7 @@ Homepage
             <img alt="Rate my CS Course background" src="{% static 'images/bg-laptop.png' %}">
             <div class="carousel-caption">
                 <h1 class="display-2">Rate My CS Course</h1>
-                <h3>Group WAD2 Project</h3>
+                <h3>A WAD2 Group Project</h3>
                 <a href="{% url 'csapp:about' %}">
                 <button type="button" class="btn btn-outline-light btn-lg">LEARN MORE</button>
                 </a>
@@ -54,9 +54,11 @@ Homepage
         <h1 class="display-4">Hi, {{ user.username}}!</h1>
         </div>
         <hr>
-        <div class="col-12">
-        <p class="lead">Go to your profile and leave a review.</p>
-        </div>
+            {% if user.userprofile.current_student %}
+                <div class="col-12">
+                <p class="lead">Go to your favourite course and leave a review.</p>
+                </div>
+            {% endif %}
         {% else %}
         <h1 class="display-4"> Something.<h1>
         </div>
