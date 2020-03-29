@@ -7,7 +7,7 @@
 
 {% block body_block %}
     <div class="main">
-    <div class="writeReview mx-auto">
+    <div class="writeReview">
     <div class="jumbotron mx-5 p-5">
     <h2>Leave a review for {{ reviewInfo.courseName }}</h2>
     <br>
@@ -23,8 +23,8 @@
             {{ reviewInfo.reviewForm.as_table }}
             </table>
             <br><br>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset"  class="btn btn-primary">Reset</button>
+            <button type="submit" class="btn btn-primary" style="display:inline-block">Submit</button>
+            <button type="reset"  class="btn btn-primary" style="display:inline-block">Reset</button>
         </form>
     {% endif %}
 </div>

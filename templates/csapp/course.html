@@ -11,7 +11,7 @@
     
     {% block body_block %}
     <div class="main">
-	<div class="jumbotron p-5 mx-5"  style="background:transparent !important" >
+	<div class="jumbotron p-5 mx-5" >
     <h2>{{ courseInfo.name }}</h2>
     <div>
         {% csrf_token %}
@@ -138,7 +138,7 @@
                 <h3> Need help? </h3>
                 {% if courseInfo.contactUsers %}
                 <p> Try contacting these students! </p>
-                <ul>
+                <ul style="list-style-type: disc; padding-left:30px">
                     {% for contactName,contactEmail in courseInfo.contactUsers.items %}
                     <li> {{ contactName }} : {{ contactEmail }} </li>
                     {% endfor %}
@@ -146,10 +146,12 @@
                 {% else %}
                 <p> Try contacting the university directly </p>
                 <p> If you are applying try these emails: </p>
-                <p> For Undergraduate Queries: info@dcs.gla.ac.uk </p>
-                <p> For Postgraduate Study Queries: socs-pgt-director@dcs.gla.ac.uk </p>
-                <p> For Postgraduate Research Queries: socs-pgr-enquiries@glasgow.ac.uk</p>
-                <p> If you are currently a student try this email: socs-teachingadmin@glasgow.ac.uk </p>
+                <ul style="list-style-type: disc; padding-left:30px">
+                <li> For Undergraduate Queries: info@dcs.gla.ac.uk </li>
+                <li> For Postgraduate Study Queries: socs-pgt-director@dcs.gla.ac.uk </li>
+                <li> For Postgraduate Research Queries: socs-pgr-enquiries@glasgow.ac.uk</li>
+                <li> If you are currently a student try this email: socs-teachingadmin@glasgow.ac.uk </li>
+                </ul>
 				
                 {% endif %}
 	{% endif %}

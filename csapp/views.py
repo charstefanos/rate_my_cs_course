@@ -383,6 +383,11 @@ def write_review(request, course_name_slug):
 def my_reviews(request):
     student = UserProfile.objects.get(user=request.user)
     reviews_list = CourseRating.objects.filter(student=student)
+    for review in reviews_list:
+        review.overall_rating=20*review.overall_rating
+        review.lecturer_rating=20*review.lecturer_rating
+        review.engagement=20*review.engagement
+        review.informative=20*review.informative
 
     return render(request, 'csapp/my_reviews.html', {'reviews_list': reviews_list})
 

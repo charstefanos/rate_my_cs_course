@@ -20,9 +20,9 @@ Register
     </p>
     <br/>
     {% else %}
-    <div class="container">
+    <div class="container" style="width:80%">
         <div class="row">
-            <div class="form-group" >
+            <div class="form-group" style="margin:auto" >
                 <form id="user_form" method="post" data_courses_url = "{% url 'csapp:ajax_load_courses' %}" action="{% url 'csapp:register' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
@@ -87,8 +87,8 @@ Register
                             {{ profile_form.contact }} </p>
                             
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-						<button type="reset"  class="btn btn-primary">Reset</button>
+                        <button type="submit" class="btn btn-primary" style="display:inline-block">Submit</button>
+						<button type="reset"  class="btn btn-primary" style="display:inline-block">Reset</button>
                     </form>
                 </div>
             </div>
