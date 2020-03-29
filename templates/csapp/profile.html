@@ -11,12 +11,14 @@
 {% endblock %}
 
 {% block body_block %}
-	<div class="account">
-		<div class="account-img-info">
-			<img class="rounded-circle account-img" src={{user.userprofile.picture.url}}>
-		</div>		
-		<div class="account-info">
-			<div class="row">
+	<div class="jumbotron my-5" style="background:#f9f9f9 !important; width: 70%; margin:auto; border-radius: 25px;">
+        <div class="container-fluid padding">
+        <div class="row">
+        <div class="col text-center">
+            <img class="rounded-circle account-img" src={{user.userprofile.picture.url}}>
+            <br><br>
+        </div>
+        <div class="col">			
 				<div class="form-group" >
 					{% if messages %}
 						{% for message in messages %}
@@ -90,6 +92,7 @@
 					</form>	
 				</div>
 			</div>
-		</div>
+        </div>
+        </div>
 	</div>	
 {% endblock %}

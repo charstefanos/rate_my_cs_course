@@ -47,7 +47,7 @@ class UserProfileForm(forms.ModelForm):
             }
 
         widgets = {
-            'courses' : forms.SelectMultiple(),
+            'courses' : forms.SelectMultiple(attrs={'class' : 'selectCourses'}),
             }
 
     def __init__(self, *args, **kwargs):
