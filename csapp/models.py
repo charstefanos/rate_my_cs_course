@@ -15,7 +15,6 @@ YEAR_IN_UNI_CHOICES = (
     )
 
 class Course(models.Model):
-#We have specified 30 for length of the name, but I will leave it 128 for now - can be changed.
     name = models.CharField(max_length=128, unique=True)
     description = models.CharField(max_length=1000)
     year_in_university = models.IntegerField(default=0)

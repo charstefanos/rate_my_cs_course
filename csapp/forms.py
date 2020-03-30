@@ -57,7 +57,6 @@ class UserProfileForm(forms.ModelForm):
         if 'year_of_studies' in self.data:
             try:
                 yearOfStudies = int(self.data.get('year_of_studies'))
-                print(yearOfStudies)
                 self.fields['courses'].queryset = Course.objects.filter(year_in_university__lte = yearOfStudies).order_by('name')
             except (ValueError, TypeError):
                 pass
@@ -65,7 +64,6 @@ class UserProfileForm(forms.ModelForm):
             if(self.instance.year_of_studies != None):
                 self.fields['courses'].queryset = Course.objects.filter(year_in_university__lte = self.instance.year_of_studies).order_by('name')
 
-#This is some testing for the reviews but havent been tested yet
 class ReviewForm(forms.ModelForm):
     overall_rating = forms.IntegerField(widget=Stars)
     lecturer_rating = forms.IntegerField(widget=Stars)
@@ -75,7 +73,6 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = CourseRating
-        # include all fields in the form.
         exclude = ("student", "course",)
 
 class ReviewDeleteForm(forms.ModelForm):
