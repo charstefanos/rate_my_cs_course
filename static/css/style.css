@@ -80,7 +80,7 @@ body{
     margin-top: 0.3 rem;
     margin-bottom: 0.1 rem;
 }
-.fa-star, .fa-fire, .fa-question-circle{
+.fa-star, .fa-fire, .fa-question-circle, .fa-user{
     font-size: 4em;
     color: #800080;
     margin: 1rem;
