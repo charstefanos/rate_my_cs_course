@@ -66,11 +66,11 @@ Homepage
         <h1 class="display-4">Hi, {{ user.username}}!</h1>
         </div>
         <hr>
-            {% if user.userprofile.current_student %}
-                <div class="col-12">
-                <p class="lead">Go to your favourite course and leave a review.</p>
-                </div>
-            {% endif %}
+        {% if user.userprofile.current_student %}
+            <div class="col-12">
+            <p class="lead">Review your CS courses and make the choice easier for other students</p>
+            </div>
+        {% endif %}
         {% else %}
         <h1 class="display-4">Choose your next CS course<h1>
         </div>
