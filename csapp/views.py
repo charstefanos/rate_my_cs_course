@@ -200,9 +200,6 @@ def course(request, course_name_slug):
 def about(request):
     return render(request, 'csapp/about.html')
 
-def opendays(request):
-    return render(request, 'csapp/opendays.html')
-
 def register(request):
     registered = False
 
@@ -299,6 +296,10 @@ def search(request):
         coursesList.append(courseDictionary)
 
     return JsonResponse(coursesList, safe=False)
+
+@login_required
+def opendays(request):
+    return render(request, 'csapp/opendays.html')
 
 @login_required
 def user_logout(request):
