@@ -2,7 +2,6 @@ certifi==2019.11.28
 Django==2.2.3
 django-braces==1.14.0
 django-model-utils==4.0.0
-django-star-ratings==0.9.1
 django-starfield==1.0.post1
 Pillow==7.0.0
 pytz==2019.3
