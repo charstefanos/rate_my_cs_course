@@ -12,6 +12,7 @@ pip install –r requirements.txt.
 ## Built With
 
 * [Bootsrap](https://getbootstrap.com/) - Extensive list of components and Bundled Javascript plugins
+* [Starfield](https://pypi.org/project/django-starfield/) - Simple widget rendering so-called rating stars as input for an integer field
 
 
 ## Team
@@ -25,4 +26,6 @@ pip install –r requirements.txt.
 ## Acknowledgments
 
 * [Zach Reed - Codepen](https://codepen.io/Bluetidepro/pen/GkpEa) - Idea how to display star ratings
+* [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html) - How to implement dependent drop-down lists
+*[Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2016/07/27/how-to-return-json-encoded-response.html) - How to return Json responses
 
