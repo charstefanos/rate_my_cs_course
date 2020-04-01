@@ -11,7 +11,7 @@
     
     {% block body_block %}
     <div class="main">
-	<div class="jumbotron p-5 mx-5" >
+	<div class="jumbotron p-4 mx-4" >
     <h2>{{ courseInfo.name }}</h2>
     <div>
         {% csrf_token %}
@@ -89,7 +89,7 @@
         <div class="card-deck">
         {% for courseIndex,dict in courseInfo.reviews.items %}
                 {% if courseIndex < 4 %}
-                <div class="card" style="width: 18rem;">
+                <div class="card cardSmall">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
@@ -105,7 +105,7 @@
                 </div>
 		{% else %}
 		<div class="hidden_reviews" hidden>
-		<div class="card" style="width: 18rem;">
+		<div class="card cardSmall">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ dict.student }}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Overall Rating</h6>
@@ -138,14 +138,14 @@
                 <h3> Need help? </h3>
                 {% if courseInfo.contactUsers %}
                 <p> Try contacting these students: </p>
-                <ul style="list-style-type: disc; padding-left:30px">
+                <ul class="customList">
                     {% for contactName,contactEmail in courseInfo.contactUsers.items %}
                     <li> {{ contactName }} : {{ contactEmail }} </li>
                     {% endfor %}
                 </ul>
                 {% else %}
                 <p> Try contacting the university directly through these emails: </p>
-                <ul style="list-style-type: disc; padding-left:30px">
+                <ul class="customList">
                 <li> For Undergraduate Queries: info@dcs.gla.ac.uk </li>
                 <li> For Postgraduate Study Queries: socs-pgt-director@dcs.gla.ac.uk </li>
                 <li> For Postgraduate Research Queries: socs-pgr-enquiries@glasgow.ac.uk</li>

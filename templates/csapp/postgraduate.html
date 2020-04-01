@@ -9,7 +9,7 @@
 <div class="main pb-4">
     <h2 class="text-center my-4"> Postgraduate Courses </h2>
     {% if courses %}
-    <div class="postgrad-container px-5 py-3 mx-5">
+    <div class="postgrad-container px-4 py-3 mx-5">
     <ul>
         {% for key,value in courses.items %}
         <li> <a href= {{ value.1 }} >{{ key }}</a>

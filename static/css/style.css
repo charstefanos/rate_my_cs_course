@@ -138,6 +138,8 @@ footer{
 .main strong{
     color: #800080;
 }
+
+/*---Search bar--*/
 .navbar input[type=text] {
   border:solid #b4b4b4; 
   margin-top: 8px;
@@ -207,7 +209,16 @@ footer{
     outline-style: none;
 }
 
-/*---Course page reviews shown - split into rows--*/
+.cardSmall{
+    width: 18rem;
+}
+.myReviewsCards{
+    width: 20rem;
+}
+.myReviewsCards .card-header{
+    height:100px;
+}
+/*---Card decks - split into rows--*/
 .card-deck {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -217,6 +228,21 @@ footer{
 .jumbotron{
     background:transparent !important;
 }
+/*---Different jumbotron style for the profile page--*/
+.customStyle{
+    background:#f9f9f9 !important;
+    width: 70%;
+    margin:auto;
+    border-radius: 25px;
+}
+
+/*---Different ul style for some pages (within the main class)--*/
+ul.customList{
+    list-style-type: disc;
+    padding-left:40px;
+}
+
+
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;
@@ -244,6 +270,7 @@ footer{
     width:300px;
     overflow-x:auto;
 }
+
     
 
 
