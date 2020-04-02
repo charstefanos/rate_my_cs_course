@@ -116,7 +116,16 @@ Homepage
         <div class="col-sm-12 col-md-4">
         <i class="fas fa-question-circle"></i>
         <h3>For More Information...</h3>
+        {% if user.is_authenticated %}
+        <ul>
+            <li class="text-justify">If you have any questions regarding a course, go to the relevant course page and check the <strong>Need Help?</strong> section 
+            for information about who you can turn to.</li>
+            <br>
+            <li class="text-justify">If you are interested in the Open Days at the University, go to the <strong>Open Days</strong> page for more information.</li>
+        </ul>
+        {% else %}
         <p>Register to be able to see additional indormation.</p>
+        {% endif %}
         </div>
         </div>
         <hr class="my-4">
