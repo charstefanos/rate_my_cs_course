@@ -23,7 +23,7 @@ pip install –r requirements.txt.
 * **Stefanos Charalambous** 
 
 
-## Acknowledgments
+## Acknowledgements
 
 * [Zach Reed - Codepen](https://codepen.io/Bluetidepro/pen/GkpEa) - Idea how to display star ratings
 * [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html) - How to implement dependent drop-down lists
