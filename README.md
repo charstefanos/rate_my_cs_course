@@ -29,4 +29,6 @@ pip install –r requirements.txt.
 * [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html) - How to implement dependent drop-down lists
 * [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2016/07/27/how-to-return-json-encoded-response.html) - How to return JSON responses
 * [Drew Ryan](https://www.youtube.com/watch?v=9cKsq14Kfsw) - Responsive Bootstrap Website Tutorial + Idea how the homepage and the navigation bar to look
+* [University of Glasgow - Course Catalogue](https://www.gla.ac.uk/coursecatalogue/courselist/?code=REG30200000&name=School+of+Computing+Science) - Used for populating the database with courses
+* [University of Glasgow - Open Days Registration Form](https://app.geckoform.com/public/#/modern/FOEU03e6aQmrJHvp) - Linked to from the Opend Days page of the application
 
