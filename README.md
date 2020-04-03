@@ -11,7 +11,7 @@ pip install –r requirements.txt.
 
 ## Built With
 
-* [Bootsrap](https://getbootstrap.com/) - Extensive list of components and Bundled Javascript plugins
+* [Bootstrap](https://getbootstrap.com/) - Extensive list of components and Bundled Javascript plugins
 * [Starfield](https://pypi.org/project/django-starfield/) - Simple widget rendering so-called rating stars as input for an integer field
 * [Fontawesome](https://fontawesome.com/) - Use of icons
 
