@@ -28,4 +28,5 @@ pip install –r requirements.txt.
 * [Zach Reed - Codepen](https://codepen.io/Bluetidepro/pen/GkpEa) - Idea how to display star ratings
 * [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html) - How to implement dependent drop-down lists
 * [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2016/07/27/how-to-return-json-encoded-response.html) - How to return Json responses
+* [Drew Ryan](https://www.youtube.com/watch?v=9cKsq14Kfsw) - Responsive Bootstrap Website Tutorial + Idea how the homepage and the navigation bar to look
 
