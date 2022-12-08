@@ -1,4 +1,4 @@
-certifi==2019.11.28
+certifi==2022.12.7
 Django==2.2.3
 django-braces==1.14.0
 django-model-utils==4.0.0
